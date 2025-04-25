@@ -26,7 +26,7 @@ export function RollingText({
 
   return (
     <div
-      className={`relative w-full text-nowrap ${className}`}
+      className={`relative w-full h-full flex items-center justify-center text-nowrap ${className}`}
       style={{ transformStyle: 'preserve-3d' }}
     >
       <AnimatePresence mode="popLayout">

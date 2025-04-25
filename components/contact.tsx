@@ -1,67 +1,69 @@
-"use client"
+'use client';
 
-import type React from "react"
+import type React from 'react';
 
-import { useEffect, useRef, useState } from "react"
-import { motion } from "framer-motion"
+import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  })
+    name: '',
+    email: '',
+    message: '',
+  });
 
-  const headingRef = useRef<HTMLHeadingElement>(null)
-  const formRef = useRef<HTMLFormElement>(null)
-  const socialsRef = useRef<HTMLDivElement>(null)
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const socialsRef = useRef<HTMLDivElement>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
+    e.preventDefault();
+    console.log('Form submitted:', formData);
     // Here you would typically send the data to your backend
-    alert("Message sent! (This is a demo)")
-  }
+    alert('Message sent! (This is a demo)');
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fade-in")
+            entry.target.classList.add('animate-fade-in');
           }
-        })
+        });
       },
-      { threshold: 0.1 },
-    )
+      { threshold: 0.1 }
+    );
 
-    if (headingRef.current) observer.observe(headingRef.current)
-    if (formRef.current) observer.observe(formRef.current)
-    if (socialsRef.current) observer.observe(socialsRef.current)
+    if (headingRef.current) observer.observe(headingRef.current);
+    if (formRef.current) observer.observe(formRef.current);
+    if (socialsRef.current) observer.observe(socialsRef.current);
 
     return () => {
-      if (headingRef.current) observer.unobserve(headingRef.current)
-      if (formRef.current) observer.unobserve(formRef.current)
-      if (socialsRef.current) observer.unobserve(socialsRef.current)
-    }
-  }, [])
+      if (headingRef.current) observer.unobserve(headingRef.current);
+      if (formRef.current) observer.unobserve(formRef.current);
+      if (socialsRef.current) observer.unobserve(socialsRef.current);
+    };
+  }, []);
 
   const socialLinks = [
-    { name: "INSTAGRAM", url: "#" },
-    { name: "LINKEDIN", url: "#" },
-    { name: "X (TWITTER)", url: "#" },
-    { name: "GITHUB", url: "#" },
-    { name: "BEHANCE", url: "#" },
-    { name: "SPOTIFY", url: "#" },
-  ]
+    { name: 'INSTAGRAM', url: '#' },
+    { name: 'LINKEDIN', url: '#' },
+    { name: 'X (TWITTER)', url: '#' },
+    { name: 'GITHUB', url: '#' },
+    { name: 'BEHANCE', url: '#' },
+    { name: 'SPOTIFY', url: '#' },
+  ];
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center py-20">
+    <div className="min-h-screen flex flex-col justify-center items-center px-4 lg:px-0 py-20">
       <motion.h1
         ref={headingRef}
         className="text-6xl font-bold mb-4 opacity-0"
@@ -159,16 +161,16 @@ export default function Contact() {
         </div>
 
         <p className="text-gray-500 text-sm mt-16">
-          For your kind info: this website is designed in{" "}
+          For your kind info: this website is designed in{' '}
           <a href="#" className="text-gray-400 hover:text-white">
             Figma
-          </a>{" "}
-          and developed in{" "}
+          </a>{' '}
+          and developed in{' '}
           <a href="#" className="text-gray-400 hover:text-white">
             Next.js
           </a>
         </p>
       </motion.div>
     </div>
-  )
+  );
 }

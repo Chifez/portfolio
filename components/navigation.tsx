@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import Image from 'next/image';
 
 interface NavigationProps {
@@ -29,7 +29,7 @@ export default function Navigation({
     if (currentSection === 'home') {
       return (
         <>
-          <div className="z-20 px-4 fixed top-8 md:left-8 flex flex-row items-end lg:items-start justify-between w-screen md:w-fit lg:flex-col space-y-4 ">
+          <div className="z-20 px-4 fixed top-8 md:left-8 flex flex-row items-end lg:items-start justify-between w-screen md:w-fit lg:flex-col space-y-4">
             {navItems.map((item) => (
               <motion.button
                 key={item.id}
@@ -90,7 +90,7 @@ export default function Navigation({
 
     if (currentSection === 'projects') {
       return (
-        <>
+        <div className="bg-[#111111] lg:bg-none z-20 fixed h-[70px] lg:h-fit w-full flex items-center justify-between">
           <div className="fixed top-8 left-8 flex items-center space-x-2">
             <ChevronLeft className="w-4 h-4" />
             <motion.button
@@ -113,38 +113,52 @@ export default function Navigation({
             </motion.button>
             <ChevronRight className="w-4 h-4" />
           </div>
-        </>
+        </div>
       );
     }
 
     if (currentSection === 'resume') {
       return (
-        <div className="fixed top-8 left-8 flex items-center space-x-2">
-          <ChevronLeft className="w-4 h-4" />
-          <motion.button
-            className="nav-link text-xs text-gray-500 hover:text-gray-300"
-            onClick={() => handleNavClick('home')}
-            whileHover={{ x: -5 }}
+        <div className="bg-[#111111] lg:bg-transparent fixed z-20 h-[70px] lg:h-fit w-full flex items-center justify-between px-8">
+          <div className="fixed top-8 left-6 lg:left-8 flex items-center space-x-2">
+            <ChevronLeft className="w-4 h-4" />
+            <motion.button
+              className="nav-link text-xs text-gray-500 hover:text-gray-300"
+              onClick={() => handleNavClick('home')}
+              whileHover={{ x: -5 }}
+              transition={{ duration: 0.2 }}
+            >
+              Back to Home
+            </motion.button>
+          </div>
+          <motion.a
+            href="/resume.pdf"
+            download
+            className="fixed top-8 right-6 lg:right-8 flex items-center space-x-2 text-xs text-gray-500 hover:text-gray-300"
+            whileHover={{ x: 5 }}
             transition={{ duration: 0.2 }}
           >
-            Back to Home
-          </motion.button>
+            <span>Download Resume</span>
+            <Download className="w-4 h-4" />
+          </motion.a>
         </div>
       );
     }
 
     if (currentSection === 'contact') {
       return (
-        <div className="fixed top-8 left-8 flex items-center space-x-2">
-          <ChevronLeft className="w-4 h-4" />
-          <motion.button
-            className="nav-link text-xs text-gray-500 hover:text-gray-300"
-            onClick={() => handleNavClick('home')}
-            whileHover={{ x: -5 }}
-            transition={{ duration: 0.2 }}
-          >
-            Back to Home
-          </motion.button>
+        <div className="bg-[#111111] lg:bg-none fixed z-20 h-[70px] lg:h-fit w-full flex items-center justify-between">
+          <div className="fixed top-8 left-6 lg:left-8 flex items-center space-x-2">
+            <ChevronLeft className="w-4 h-4" />
+            <motion.button
+              className="nav-link text-xs text-gray-500 hover:text-gray-300"
+              onClick={() => handleNavClick('home')}
+              whileHover={{ x: -5 }}
+              transition={{ duration: 0.2 }}
+            >
+              Back to Home
+            </motion.button>
+          </div>
         </div>
       );
     }

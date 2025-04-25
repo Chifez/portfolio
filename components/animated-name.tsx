@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RollingTitles } from './rolling-title';
+import InfiniteCarousel from './infinite-carousel';
 
 const titles = ['FRONTEND ENGINEER', 'FULLSTACK ENGINEER'];
 
@@ -58,39 +59,15 @@ export default function AnimatedName() {
 
       {/* Mobile Layout */}
       {isMobile && (
-        <div className="relative h-[400px] overflow-hidden">
-          {/* First Name - Left to Right */}
-          <motion.div
-            className="absolute text-[8rem] sm:text-[9rem] font-bold text-gray-400 leading-[0.85] tracking-tighter"
-            animate={{
-              x: ['-100%', '100%'],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-          >
-            IFEANYI
-          </motion.div>
+        <div className="relative flex flex-col items-center justify-center h-[400px] w-full overflow-hidden">
+          {/* Top Row - Right to Left */}
+          <InfiniteCarousel text="IFEANYI EMMANUEL" direction="left" />
 
-          {/* Title - Dice Effect */}
+          {/* Middle - Rolling Title */}
           <RollingTitles />
 
-          {/* Second Name - Right to Left */}
-          <motion.div
-            className="absolute text-[8rem] sm:text-[9rem] font-bold text-gray-400 leading-[0.85] tracking-tighter"
-            animate={{
-              x: ['100%', '-100%'],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-          >
-            EMMANUEL
-          </motion.div>
+          {/* Bottom Row - Left to Right */}
+          <InfiniteCarousel text="IFEANYI EMMANUEL" direction="right" />
         </div>
       )}
     </div>
