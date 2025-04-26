@@ -25,6 +25,10 @@ export default function Navigation({
     setCurrentSection(section);
   };
 
+  const handleResumeClick = () => {
+    window.open('/resume.pdf', '_blank');
+  };
+
   const getNavLinks = () => {
     if (currentSection === 'home') {
       return (
@@ -79,6 +83,7 @@ export default function Navigation({
               className="nav-link text-xs text-gray-500 hover:text-gray-300"
               whileHover={{ x: 5 }}
               transition={{ duration: 0.2 }}
+              onClick={() => handleNavClick('projects')}
             >
               See my projects
             </motion.button>
@@ -137,6 +142,7 @@ export default function Navigation({
             className="fixed top-8 right-6 lg:right-8 flex items-center space-x-2 text-xs text-gray-500 hover:text-gray-300"
             whileHover={{ x: 5 }}
             transition={{ duration: 0.2 }}
+            onClick={handleResumeClick}
           >
             <span>Download Resume</span>
             <Download className="w-4 h-4" />

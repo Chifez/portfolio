@@ -7,6 +7,7 @@ interface Project {
   title: string;
   description: string;
   technologies: string[];
+  link?: string;
 }
 
 export default function Projects() {
@@ -19,10 +20,12 @@ export default function Projects() {
       description:
         'A GPT-4 based AI assistant for people to get quizzes on any subject',
       technologies: ['NEXTJS', 'TYPESCRIPT', 'TAILWINDCSS', 'OPENAI API'],
+      link: 'https://assigngpt.vercel.app/',
     },
     {
       title: 'CONVERTLY',
-      description: 'A speech-to-speech translation app',
+      description:
+        'A speech-to-text converter, with options for downloading, editing and sharing either as an image or a text file format of choice',
       technologies: [
         'TAILWINDCSS',
         'NEXTJS',
@@ -31,13 +34,33 @@ export default function Projects() {
         'EXPRESSJS',
         'NODEJS',
       ],
+      link: 'https://stt-app-roan.vercel.app/',
     },
     {
-      title: 'URLIFY',
-      description: 'A super simple URL shortener',
-      technologies: ['HTML', 'CSS', 'JS', 'BITLY API'],
+      title: 'CLI-TEMPLATE-STARTER',
+      description:
+        'A cli tool for scaffolding frontend projects with a framework of choice',
+      technologies: ['JAVASCRIPT', 'NODEJS', 'YAML', 'NODEJS'],
+      link: 'https://github.com/Chifez/cli-template-starter',
+    },
+    {
+      title: 'ENSUBEB',
+      description:
+        'A website and admin dashboard for the Ensubeb, a Nigerian government agency that oversees the primary education in ENUGU STATE',
+      technologies: [
+        'NEXTJS',
+        'TYPESCRIPT',
+        'TAILWINDCSS',
+        'SANITY CMS',
+        'DJANGO',
+      ],
+      link: 'https://frontend-et2i.onrender.com/',
     },
   ];
+
+  const handleProjectClick = (link: string | undefined) => {
+    window.open(link, '_blank');
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -81,7 +104,7 @@ export default function Projects() {
       </motion.div>
       <motion.div
         ref={projectsRef}
-        className="grid grid-cols-1 md:grid-cols-3 gap-0 opacity-0"
+        className="flex lg:flex-row flex-col w-full overflow-x-auto scroll-hidden gap-0 opacity-0 cursor-pointer"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -89,9 +112,10 @@ export default function Projects() {
         {projects.map((project, index) => (
           <motion.div
             key={index}
-            className="project-card min-h-[300px] flex flex-col"
+            className="project-card min-h-[300px] w-full lg:w-[calc(100vw/3)] flex-shrink-0 flex flex-col p-8"
             whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.03)' }}
             transition={{ duration: 0.3 }}
+            onClick={() => handleProjectClick(project.link)}
           >
             <h2 className="text-4xl font-bold mb-4">{project.title}</h2>
             <p className="text-gray-500 mb-auto">{project.description}</p>

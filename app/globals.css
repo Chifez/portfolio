@@ -11,11 +11,11 @@ body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
   overflow-x: hidden;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .name-text {
-  font-family: "Helvetica Neue", Helvetica, "Arial Nova", Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, 'Arial Nova', Arial, sans-serif;
   font-weight: 700;
   letter-spacing: -0.05em;
 }
@@ -34,6 +34,13 @@ body {
 
 .social-link {
   @apply text-gray-500 hover:text-white transition-colors duration-300;
+}
+.scroll-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
 }
 
 @keyframes fadeIn {
