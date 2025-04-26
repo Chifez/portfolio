@@ -52,16 +52,16 @@ export default function About() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Well, if you were to ask me who I am, I&apos;d say I&apos;m a 19 yr
-          old computer science student at IIIT Delhi, diving into the world of
-          code. I&apos;m all about keeping things clean and simple - crafting
-          creations that look sleek and function smoothly. I&apos;m like a
-          design-minded coder, always exploring and evolving. While I&apos;m
-          still discovering my exact path, one thing&apos;s certain: I love
-          building new things or giving a fresh twist to what&apos;s already
-          there. Making interfaces smoother? That&apos;s what I enjoy. So, in a
-          nutshell, I&apos;m all about tech, design, and the pure joy of making
-          things click.
+          I’m Emmanuel, a frontend engineer who loves making things feel
+          effortless — even when they’re not. My work sits at the intersection
+          of interaction and intention. I design and build interfaces that are
+          fast, minimal, and thoughtful — not just in how they look, but how
+          they work. I care about how users feel while using what I build. My
+          toolkit shifts with the project, but you'll usually find me working
+          with Next.js, Svelte, Supabase, and Tailwind. I’ve built everything
+          from learning platforms to dashboards — with clean code and clean
+          design going hand in hand. If it moves with purpose and looks like it
+          belongs, I probably had something to do with it.
         </motion.p>
 
         <div className="mt-8 flex items-center">
