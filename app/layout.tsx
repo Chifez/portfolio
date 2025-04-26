@@ -1,18 +1,18 @@
-import type React from "react"
-import type { Metadata } from "next"
-import "./globals.css"
-import Providers from "./providers"
+import type React from 'react';
+import type { Metadata } from 'next';
+import './globals.css';
+import Providers from './providers';
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Personal portfolio website",
-    generator: 'v0.dev'
-}
+  title: 'Ifeanyi Portfolio',
+  description: 'Web portfolio for Ifeanyi Emmanuel, a frontend engineer',
+  generator: 'v0.dev',
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -20,5 +20,5 @@ export default function RootLayout({
         <Providers>{children}</Providers>
       </body>
     </html>
-  )
+  );
 }

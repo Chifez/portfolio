@@ -4,6 +4,7 @@ import type React from 'react';
 
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -15,7 +16,7 @@ export default function Contact() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const socialsRef = useRef<HTMLDivElement>(null);
-
+  const isMobile = useIsMobile();
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -69,7 +70,7 @@ export default function Contact() {
         className="text-6xl font-bold mb-4 opacity-0"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: isMobile ? 0.7 : 0.5 }}
       >
         SAY HELLO!
       </motion.h1>
@@ -78,7 +79,7 @@ export default function Contact() {
         className="text-xl text-gray-400 mb-12 opacity-0"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: isMobile ? 0.7 : 0.5, delay: 0.2 }}
       >
         I&apos;m just a few pixels away
       </motion.p>
@@ -89,7 +90,7 @@ export default function Contact() {
         className="w-full max-w-lg opacity-0"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
+        transition={{ duration: isMobile ? 0.7 : 0.5, delay: 0.4 }}
       >
         <div className="flex flex-col md:flex-row gap-8 mb-8">
           <div className="flex-1">

@@ -5,6 +5,21 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import AnimatedName from './animated-name';
 
+const socialLinks = [
+  {
+    href: 'https://github.com/Chifez',
+    label: 'github',
+  },
+  {
+    href: 'https://twitter.com',
+    label: 'follow on twitter',
+  },
+  {
+    href: 'https://linkedin.com/in/nwosuifeanyiemmanuel',
+    label: 'visit linkedin',
+  },
+];
+
 export default function Home() {
   const nameRef = useRef<HTMLHeadingElement>(null);
 
@@ -32,43 +47,69 @@ export default function Home() {
   }, []);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.8 }}
-      transition={{ duration: 0.5, ease: 'easeInOut' }}
-      className="min-h-screen flex flex-col"
-    >
+    <div className="min-h-screen flex flex-col">
       <div className="mt-40 px-2 lg:px-4">
         <AnimatedName />
       </div>
 
-      <div className="fixed bottom-8 flex justify-end w-full px-8 space-x-8">
-        <Link
-          href="https://github.com/Chifez"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xs text-gray-500 hover:text-white transition-colors"
-        >
-          github
-        </Link>
-        <Link
-          href="https://twitter.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xs text-gray-500 hover:text-white transition-colors"
-        >
-          follow on twitter
-        </Link>
-        <Link
-          href="https://linkedin.com/in/nwosuifeanyiemmanuel"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xs text-gray-500 hover:text-white transition-colors"
-        >
-          visit linkedin
-        </Link>
-      </div>
-    </motion.div>
+      <motion.div
+        className="fixed bottom-8 flex justify-end w-full px-8 space-x-8"
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={{
+          initial: {
+            opacity: 0,
+          },
+          animate: {
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.1,
+            },
+          },
+          exit: {
+            opacity: 0,
+            transition: {
+              staggerChildren: 0.1,
+              staggerDirection: -1,
+            },
+          },
+        }}
+      >
+        {socialLinks.map((link, index) => (
+          <motion.div
+            key={link.href}
+            variants={{
+              initial: { opacity: 0, y: 20 },
+              animate: {
+                opacity: 1,
+                y: 0,
+                transition: {
+                  duration: 1,
+                  ease: [0.32, 0.72, 0, 1],
+                },
+              },
+              exit: {
+                opacity: 0,
+                y: -20,
+                transition: {
+                  duration: 1,
+                  ease: [0.32, 0.72, 0, 1],
+                },
+              },
+            }}
+          >
+            <Link
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-gray-500 hover:text-white transition-colors"
+            >
+              {link.label}
+            </Link>
+          </motion.div>
+        ))}
+      </motion.div>
+    </div>
   );
 }

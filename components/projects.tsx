@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-
+import { useIsMobile } from '@/hooks/use-mobile';
 interface Project {
   title: string;
   description: string;
@@ -13,7 +13,7 @@ interface Project {
 export default function Projects() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
-
+  const isMobile = useIsMobile();
   const projects: Project[] = [
     {
       title: 'ASSIGNGPT',
@@ -90,7 +90,7 @@ export default function Projects() {
         className="text-6xl md:text-7xl font-bold text-center mb-10 opacity-0 tracking-tighter"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: isMobile ? 0.7 : 0.5 }}
       >
         PROJECTS ({projects.length})
       </motion.h1>
@@ -107,14 +107,14 @@ export default function Projects() {
         className="flex lg:flex-row flex-col w-full overflow-x-auto scroll-hidden gap-0 opacity-0 cursor-pointer"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: isMobile ? 0.7 : 0.5, delay: 0.2 }}
       >
         {projects.map((project, index) => (
           <motion.div
             key={index}
             className="project-card min-h-[300px] w-full lg:w-[calc(100vw/3)] flex-shrink-0 flex flex-col p-8"
             whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.03)' }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: isMobile ? 0.5 : 0.3 }}
             onClick={() => handleProjectClick(project.link)}
           >
             <h2 className="text-4xl font-bold mb-4">{project.title}</h2>

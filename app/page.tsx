@@ -67,10 +67,13 @@ export default function Page() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentSection}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{
+                  duration: 0.5,
+                  ease: [0.4, 0, 0.2, 1], // cubic-bezier for smooth animation
+                }}
                 className="w-full"
               >
                 {sections[currentSection as keyof typeof sections]}
@@ -107,9 +110,9 @@ function LoadingPercentage() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="text-5xl font-bold mb-8 text-gray-400">
-        Loading... {progress}%
+    <div className="realtive flex flex-col items-center">
+      <div className="absolute right-3 bottom-2 text-7xl font-bold mb-8 text-gray-400">
+        {progress}%
       </div>
       <div className="w-64 h-1 bg-gray-800 rounded-full overflow-hidden">
         <motion.div

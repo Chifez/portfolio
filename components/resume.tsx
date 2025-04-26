@@ -3,10 +3,11 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-
+import { useIsMobile } from '@/hooks/use-mobile';
 export default function Resume() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,7 +37,7 @@ export default function Resume() {
         className="text-5xl md:text-6xl font-bold mb-8 opacity-0 max-w-4xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: isMobile ? 0.7 : 0.5 }}
       >
         RESUME
       </motion.h1>
@@ -46,7 +47,7 @@ export default function Resume() {
         className="opacity-0 space-y-12 max-w-4xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: isMobile ? 0.7 : 0.5, delay: 0.2 }}
       >
         <div className="space-y-4">
           <h2 className="text-3xl font-semibold text-white">

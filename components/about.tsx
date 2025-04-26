@@ -4,11 +4,12 @@ import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ChevronRight } from 'lucide-react';
-
+import { useIsMobile } from '../hooks/use-mobile';
 export default function About() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -35,13 +36,13 @@ export default function About() {
 
   return (
     <div className="px-4 lg:px-0 lg:pl-10 min-h-screen grid grid-cols-1 md:grid-cols-2 gap-8 py-20 lg:py-0">
-      <div className="flex flex-col justify-center">
+      <div className="flex flex-col justify-center lg:pt-10">
         <motion.h1
           ref={headingRef}
           className="text-6xl font-bold mb-8 opacity-0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: isMobile ? 0.7 : 0.5 }}
         >
           WHO AM I?
         </motion.h1>
@@ -50,7 +51,7 @@ export default function About() {
           className="text-xl leading-relaxed text-gray-400 opacity-0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: isMobile ? 0.7 : 0.5, delay: 0.2 }}
         >
           I’m Emmanuel, a frontend engineer who loves making things feel
           effortless — even when they’re not. My work sits at the intersection
