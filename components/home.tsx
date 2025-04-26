@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import AnimatedName from './animated-name';
+import AnimatedName from './animations/animated-name';
 
 const socialLinks = [
   {
@@ -47,7 +47,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="cursor-pointer min-h-screen flex flex-col">
       <div className="mt-40 px-2 lg:px-4">
         <AnimatedName />
       </div>

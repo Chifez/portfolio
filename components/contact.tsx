@@ -1,13 +1,14 @@
 'use client';
 
-import type React from 'react';
-
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useMutation } from '@tanstack/react-query';
+import { toast } from 'sonner';
+import { contactSchema, type ContactFormData } from '@/lib/validations/contact';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
     message: '',
@@ -17,6 +18,33 @@ export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
   const socialsRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
+
+  const { mutate: submitForm, isPending } = useMutation({
+    mutationFn: async (data: ContactFormData) => {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Something went wrong');
+      }
+
+      return response.json();
+    },
+    onSuccess: () => {
+      toast.success('Message sent successfully!');
+      setFormData({ name: '', email: '', message: '' });
+    },
+    onError: (error: Error) => {
+      toast.error(error.message);
+    },
+  });
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -24,11 +52,17 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Here you would typically send the data to your backend
-    alert('Message sent! (This is a demo)');
+
+    try {
+      const validatedData = contactSchema.parse(formData);
+      submitForm(validatedData);
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
+    }
   };
 
   useEffect(() => {
@@ -129,11 +163,12 @@ export default function Contact() {
         <div className="flex justify-end">
           <motion.button
             type="submit"
-            className="px-6 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-sm"
+            disabled={isPending}
+            className="px-6 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-sm disabled:opacity-50"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Send
+            {isPending ? 'Sending...' : 'Send'}
           </motion.button>
         </div>
       </motion.form>
