@@ -7,10 +7,9 @@ const SPOTIFY_REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN;
 const basic = Buffer.from(
   `${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`
 ).toString('base64');
-const NOW_PLAYING_ENDPOINT = process.env.NOW_PLAYING_ENDPOINT!;
-const TOKEN_ENDPOINT = process.env.TOKEN_ENDPOINT!;
 
 async function getAccessToken() {
+  const TOKEN_ENDPOINT = process.env.TOKEN_ENDPOINT!;
   const response = await fetch(TOKEN_ENDPOINT, {
     method: 'POST',
     headers: {
@@ -27,6 +26,7 @@ async function getAccessToken() {
 }
 
 export async function GET() {
+  const NOW_PLAYING_ENDPOINT = process.env.NOW_PLAYING_ENDPOINT!;
   try {
     const { access_token } = await getAccessToken();
 

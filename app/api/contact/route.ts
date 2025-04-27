@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import ContactEmail from '@/components/email-template';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -18,13 +19,9 @@ export async function POST(request: Request) {
     const { data, error } = await resend.emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>',
       to: process.env.CONTACT_EMAIL!,
-      subject: `New Contact Form Submission from ${name}`,
+      subject: `New Portfolio message from ${name}`,
       replyTo: email,
-      text: `
-Name: ${name}
-Email: ${email}
-Message: ${message}
-      `,
+      react: ContactEmail({ name, email, message }),
     });
 
     if (error) {

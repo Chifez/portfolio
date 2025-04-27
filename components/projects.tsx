@@ -1,19 +1,24 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useIsMobile } from '@/hooks/use-mobile';
+import CustomCursor from './cursor';
+
 interface Project {
   title: string;
   description: string;
   technologies: string[];
   link?: string;
+  image?: string;
 }
 
 export default function Projects() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
+  const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
+
   const projects: Project[] = [
     {
       title: 'ASSIGNGPT',
@@ -21,6 +26,7 @@ export default function Projects() {
         'A GPT-4 based AI assistant for people to get quizzes on any subject',
       technologies: ['NEXTJS', 'TYPESCRIPT', 'TAILWINDCSS', 'OPENAI API'],
       link: 'https://assigngpt.vercel.app/',
+      image: '/projects/assigngpt.png',
     },
     {
       title: 'CONVERTLY',
@@ -35,6 +41,7 @@ export default function Projects() {
         'NODEJS',
       ],
       link: 'https://stt-app-roan.vercel.app/',
+      image: '/user.webp',
     },
     {
       title: 'CLI-TEMPLATE-STARTER',
@@ -42,6 +49,7 @@ export default function Projects() {
         'A cli tool for scaffolding frontend projects with a framework of choice',
       technologies: ['JAVASCRIPT', 'NODEJS', 'YAML', 'NODEJS'],
       link: 'https://github.com/Chifez/cli-template-starter',
+      image: '/user.webp',
     },
     {
       title: 'ENSUBEB',
@@ -55,6 +63,7 @@ export default function Projects() {
         'DJANGO',
       ],
       link: 'https://frontend-et2i.onrender.com/',
+      image: '/user.webp',
     },
   ];
 
@@ -85,6 +94,8 @@ export default function Projects() {
 
   return (
     <div className="min-h-screen py-20 lg:py-10">
+      <CustomCursor projectImage={hoveredProject?.image} />
+
       <motion.h1
         ref={headingRef}
         className="text-6xl md:text-7xl font-bold text-center mb-10 opacity-0 tracking-tighter"
@@ -116,6 +127,8 @@ export default function Projects() {
             whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.03)' }}
             transition={{ duration: isMobile ? 0.5 : 0.3 }}
             onClick={() => handleProjectClick(project.link)}
+            onMouseEnter={() => setHoveredProject(project)}
+            onMouseLeave={() => setHoveredProject(null)}
           >
             <h2 className="text-4xl font-bold mb-4">{project.title}</h2>
             <p className="text-gray-500 mb-auto">{project.description}</p>

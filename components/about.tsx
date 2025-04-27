@@ -92,7 +92,7 @@ export default function About() {
         <div className="relative w-full h-[600px] lg:h-screen overflow-hidden">
           <ImageAnimate />
           <Image
-            src="/placeholder.svg?height=600&width=500"
+            src="/user.webp?height=600&width=500"
             alt="Profile image with dot pattern"
             fill
             className="w-full h-full object-cover"

@@ -46,10 +46,13 @@ export default function Navigation({
               </motion.button>
             ))}
           </div>
-          <div className="hidden md:block fixed top-8 right-8">
+          <div
+            onClick={() => handleNavClick('about')}
+            className="hidden md:block fixed top-8 right-8"
+          >
             <div className="relative w-12 h-12 overflow-hidden rounded-md">
               <Image
-                src="/placeholder.svg?height=48&width=48"
+                src="/user.webp?height=48&width=48"
                 alt="Profile"
                 width={48}
                 height={48}

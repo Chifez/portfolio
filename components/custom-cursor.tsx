@@ -3,71 +3,57 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-interface CursorProps {
+interface CustomCursorProps {
   projectImage?: string;
 }
 
-export default function CustomCursor({ projectImage }: CursorProps) {
+export default function CustomCursor({ projectImage }: CustomCursorProps) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-  const [isProjectHovering, setIsProjectHovering] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.tagName === 'A' || target.tagName === 'BUTTON') {
-        setIsHovering(true);
-      }
-    };
-
-    const handleMouseOut = () => {
-      setIsHovering(false);
-    };
-
     window.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseover', handleMouseOver);
-    document.addEventListener('mouseout', handleMouseOut);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseover', handleMouseOver);
-      document.removeEventListener('mouseout', handleMouseOut);
     };
   }, []);
 
   useEffect(() => {
     if (projectImage) {
-      setIsProjectHovering(true);
+      setIsHovering(true);
     } else {
-      setIsProjectHovering(false);
+      setIsHovering(false);
     }
   }, [projectImage]);
 
   return (
     <>
       <motion.div
-        className="hidden lg:block fixed top-0 left-0 w-6 h-6 rounded-full bg-white mix-blend-difference pointer-events-none z-50"
+        className="fixed pointer-events-none z-50 mix-blend-difference"
         animate={{
-          x: mousePosition.x - 12,
-          y: mousePosition.y - 12,
-          scale: isHovering || isProjectHovering ? 1.5 : 1,
+          x: mousePosition.x - 16,
+          y: mousePosition.y - 16,
+          scale: isHovering ? 1.5 : 1,
         }}
         transition={{
           type: 'spring',
-          damping: 25,
-          stiffness: 300,
-          mass: 0.5,
+          mass: 0.6,
+          stiffness: 200,
+          damping: 20,
         }}
-      />
+      >
+        <div className="w-8 h-8 bg-white rounded-full" />
+      </motion.div>
 
       <AnimatePresence>
-        {isProjectHovering && projectImage && (
+        {isHovering && projectImage && (
           <motion.div
-            className="hidden lg:block fixed pointer-events-none z-40"
+            className="fixed pointer-events-none z-40"
             initial={{
               opacity: 0,
               scale: 0.8,
@@ -83,9 +69,9 @@ export default function CustomCursor({ projectImage }: CursorProps) {
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{
               type: 'spring',
-              damping: 25,
-              stiffness: 300,
-              mass: 0.5,
+              mass: 0.6,
+              stiffness: 200,
+              damping: 20,
             }}
           >
             <motion.div
