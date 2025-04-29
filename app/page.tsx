@@ -70,6 +70,7 @@ export default function Page() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
+                layoutId={currentSection}
                 transition={{
                   duration: 0.5,
                   ease: [0.4, 0, 0.2, 1], // cubic-bezier for smooth animation

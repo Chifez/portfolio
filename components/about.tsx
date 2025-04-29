@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useIsMobile } from '../hooks/use-mobile';
 import ImageAnimate from './animations/image-reveal';
 import { imageContainer } from './animations/variants';
+import PageReveal from './animations/page-reveal';
 
 interface SpotifyData {
   isPlaying: boolean;
@@ -15,7 +16,7 @@ interface SpotifyData {
   songUrl?: string;
 }
 
-export default function About() {
+function About() {
   const isMobile = useIsMobile();
 
   const { data: spotifyData } = useQuery<SpotifyData>({
@@ -90,11 +91,12 @@ export default function About() {
         animate="visible"
       >
         <div className="relative w-full h-[600px] lg:h-screen overflow-hidden">
-          <ImageAnimate />
+          <ImageAnimate imagedelay={0.8} />
           <Image
             src="/user.webp?height=600&width=500"
             alt="Profile image with dot pattern"
             fill
+            priority
             className="w-full h-full object-cover"
           />
         </div>
@@ -102,3 +104,4 @@ export default function About() {
     </div>
   );
 }
+export default About;

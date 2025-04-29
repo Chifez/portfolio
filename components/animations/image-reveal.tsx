@@ -15,7 +15,7 @@ const ImageAnimate: React.FC<ImageProps> = ({
       variants={imageReveal}
       animate="animate"
       transition={{
-        duration: 0.5,
+        duration: 1,
         type: 'spring',
         delay: imagedelay ? imagedelay : 0,
         damping: 50,

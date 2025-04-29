@@ -26,7 +26,21 @@ export default function Projects() {
         'A GPT-4 based AI assistant for people to get quizzes on any subject',
       technologies: ['NEXTJS', 'TYPESCRIPT', 'TAILWINDCSS', 'OPENAI API'],
       link: 'https://assigngpt.vercel.app/',
-      image: '/projects/assigngpt.png',
+      image: '/assign.png',
+    },
+    {
+      title: 'ECHO',
+      description:
+        'A personal blogging website, where I write about my experiences and thoughts',
+      technologies: [
+        'TAILWINDCSS',
+        'SVELTE',
+        'TYPESCRIPT',
+        'MONGODB',
+        'NODEJS',
+      ],
+      link: 'https://echo-chifez.vercel.app/',
+      image: '/echo.png',
     },
     {
       title: 'CONVERTLY',
@@ -41,7 +55,7 @@ export default function Projects() {
         'NODEJS',
       ],
       link: 'https://stt-app-roan.vercel.app/',
-      image: '/user.webp',
+      image: '/convertly.png',
     },
     {
       title: 'CLI-TEMPLATE-STARTER',
@@ -63,7 +77,7 @@ export default function Projects() {
         'DJANGO',
       ],
       link: 'https://frontend-et2i.onrender.com/',
-      image: '/user.webp',
+      image: '/ensubeb.png',
     },
   ];
 
@@ -115,7 +129,7 @@ export default function Projects() {
       </motion.div>
       <motion.div
         ref={projectsRef}
-        className="flex lg:flex-row flex-col w-full overflow-x-auto scroll-hidden gap-0 opacity-0 cursor-pointer"
+        className="flex lg:flex-row flex-col w-full overflow-x-auto scroll-hidden gap-4 opacity-0 cursor-pointer px-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: isMobile ? 0.7 : 0.5, delay: 0.2 }}
@@ -123,7 +137,7 @@ export default function Projects() {
         {projects.map((project, index) => (
           <motion.div
             key={index}
-            className="project-card min-h-[300px] w-full lg:w-[calc(100vw/3)] flex-shrink-0 flex flex-col p-8"
+            className="project-card min-h-[300px] w-full lg:w-[calc(100vw/3)] flex-shrink-0 flex flex-col rounded-2xl p-8"
             whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.03)' }}
             transition={{ duration: isMobile ? 0.5 : 0.3 }}
             onClick={() => handleProjectClick(project.link)}

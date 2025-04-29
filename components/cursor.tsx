@@ -78,7 +78,7 @@ export default function CustomCursor({ projectImage }: CursorProps) {
               opacity: 1,
               scale: 1,
               x: mousePosition.x - 100,
-              y: mousePosition.y - 100,
+              y: mousePosition.y - 180,
             }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{
@@ -89,7 +89,7 @@ export default function CustomCursor({ projectImage }: CursorProps) {
             }}
           >
             <motion.div
-              className="w-48 h-48 rounded-lg overflow-hidden"
+              className="w-52 h-32 rounded-xl p-2 overflow-hidden bg-slate-800"
               initial={{ rotate: -5 }}
               animate={{ rotate: 5 }}
               transition={{
@@ -102,7 +102,7 @@ export default function CustomCursor({ projectImage }: CursorProps) {
               <img
                 src={projectImage}
                 alt="Project preview"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-xl"
               />
             </motion.div>
           </motion.div>
