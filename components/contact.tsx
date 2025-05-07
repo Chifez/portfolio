@@ -95,7 +95,7 @@ export default function Contact() {
       url: 'https://www.linkedin.com/in/nwosuifeanyiemmanuel',
     },
     { name: 'X (TWITTER)', url: 'https://twitter.com/chifez4u' },
-    { name: 'GITHUB', url: 'https://github.com/chifez4u' },
+    { name: 'GITHUB', url: 'https://github.com/Chifez' },
     {
       name: 'SPOTIFY',
       url: 'https://open.spotify.com/user/31xnn7hyyhveelllx7rhzen4dqbu',
