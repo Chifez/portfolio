@@ -8,9 +8,10 @@ import About from '@/components/about';
 import Projects from '@/components/projects';
 import Contact from '@/components/contact';
 import Resume from '@/components/resume';
+import { useNavigation } from '@/lib/context/navigation-context';
 
 export default function Page() {
-  const [currentSection, setCurrentSection] = useState('home');
+  const { currentSection } = useNavigation();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -22,27 +23,31 @@ export default function Page() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Function to handle section changes
-  const handleSectionChange = (section: string) => {
-    console.log('Changing section to:', section);
-    setCurrentSection(section);
-  };
-
-  const sections = {
-    home: <Home />,
-    about: <About />,
-    projects: <Projects />,
-    resume: <Resume />,
-    contact: <Contact />,
+  // Simple section renderer
+  const renderSection = () => {
+    switch (currentSection) {
+      case 'home':
+        return <Home />;
+      case 'about':
+        return <About />;
+      case 'projects':
+        return <Projects />;
+      case 'resume':
+        return <Resume />;
+      case 'contact':
+        return <Contact />;
+      default:
+        return <Home />;
+    }
   };
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen overflow-x-hidden">
       <AnimatePresence mode="wait">
         {isLoading ? (
           <motion.div
             key="loader"
-            className="fixed inset-0 bg-[#111111] flex flex-col items-center justify-center"
+            className="fixed inset-0 bg-[#111111] flex flex-col items-center justify-center z-50"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
@@ -52,35 +57,10 @@ export default function Page() {
             </div>
           </motion.div>
         ) : (
-          <motion.div
-            key="content"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="w-full"
-          >
-            <Navigation
-              currentSection={currentSection}
-              setCurrentSection={handleSectionChange}
-            />
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentSection}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                layoutId={currentSection}
-                transition={{
-                  duration: 0.5,
-                  ease: [0.4, 0, 0.2, 1], // cubic-bezier for smooth animation
-                }}
-                className="w-full"
-              >
-                {sections[currentSection as keyof typeof sections]}
-              </motion.div>
-            </AnimatePresence>
-          </motion.div>
+          <div key="content" className="w-full">
+            <Navigation />
+            {renderSection()}
+          </div>
         )}
       </AnimatePresence>
     </main>

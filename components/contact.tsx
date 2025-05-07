@@ -89,89 +89,94 @@ export default function Contact() {
   }, []);
 
   const socialLinks = [
-    { name: 'INSTAGRAM', url: '#' },
-    { name: 'LINKEDIN', url: '#' },
-    { name: 'X (TWITTER)', url: '#' },
-    { name: 'GITHUB', url: '#' },
-    { name: 'BEHANCE', url: '#' },
-    { name: 'SPOTIFY', url: '#' },
+    // { name: 'INSTAGRAM', url: 'https://www.instagram.com/chifez4u' },
+    {
+      name: 'LINKEDIN',
+      url: 'https://www.linkedin.com/in/nwosuifeanyiemmanuel',
+    },
+    { name: 'X (TWITTER)', url: 'https://twitter.com/chifez4u' },
+    { name: 'GITHUB', url: 'https://github.com/chifez4u' },
+    {
+      name: 'SPOTIFY',
+      url: 'https://open.spotify.com/user/31xnn7hyyhveelllx7rhzen4dqbu',
+    },
   ];
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center px-4 lg:px-0 py-20">
-      <motion.h1
-        ref={headingRef}
-        className="text-6xl font-bold mb-4 opacity-0"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: isMobile ? 0.7 : 0.5 }}
-      >
-        SAY HELLO!
-      </motion.h1>
-
-      <motion.p
-        className="text-xl text-gray-400 mb-12 opacity-0"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: isMobile ? 0.7 : 0.5, delay: 0.2 }}
-      >
-        I&apos;m just a few pixels away
-      </motion.p>
-
-      <motion.form
-        ref={formRef}
-        onSubmit={handleSubmit}
-        className="w-full max-w-lg opacity-0"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: isMobile ? 0.7 : 0.5, delay: 0.4 }}
-      >
-        <div className="flex flex-col md:flex-row gap-8 mb-8">
-          <div className="flex-1">
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              value={formData.name}
-              onChange={handleChange}
-              className="input-field"
-              required
-            />
+    <div className="min-h-screen flex flex-col lg:flex-row justify-center lg:justify-evenly items-center lg:items-end px-4 lg:px-0 py-20">
+      <div>
+        <motion.h1
+          ref={headingRef}
+          className="text-5xl lg:text-6xl font-bold mb-4 opacity-0"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: isMobile ? 0.7 : 0.5 }}
+        >
+          LET&apos;S TALK!
+        </motion.h1>
+        <motion.p
+          className="text-xl text-gray-400 mb-12 opacity-0"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: isMobile ? 0.7 : 0.5, delay: 0.2 }}
+        >
+          I&apos;m just a few blocks of code away
+        </motion.p>
+        <motion.form
+          ref={formRef}
+          onSubmit={handleSubmit}
+          className="w-full max-w-lg opacity-0"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: isMobile ? 0.7 : 0.5, delay: 0.4 }}
+        >
+          <div className="flex flex-col md:flex-row gap-8 mb-8">
+            <div className="flex-1">
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={formData.name}
+                onChange={handleChange}
+                className="input-field"
+                required
+              />
+            </div>
+            <div className="flex-1">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                className="input-field"
+                required
+              />
+            </div>
           </div>
-          <div className="flex-1">
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              className="input-field"
-              required
-            />
+
+          <textarea
+            name="message"
+            placeholder="Hey! I liked your website, are you free for a meet?"
+            value={formData.message}
+            onChange={handleChange}
+            className="input-field h-32 resize-none mb-8"
+            required
+          />
+
+          <div className="flex justify-end">
+            <motion.button
+              type="submit"
+              disabled={isPending}
+              className="px-8 py-2 bg-gray-300 hover:bg-gray-300 uppercase font-semibold text-[#111111] rounded-sm disabled:opacity-50"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {isPending ? 'Sending...' : 'Send'}
+            </motion.button>
           </div>
-        </div>
-
-        <textarea
-          name="message"
-          placeholder="Hey! I liked your website, can we collab?"
-          value={formData.message}
-          onChange={handleChange}
-          className="input-field h-32 resize-none mb-8"
-          required
-        />
-
-        <div className="flex justify-end">
-          <motion.button
-            type="submit"
-            disabled={isPending}
-            className="px-6 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-sm disabled:opacity-50"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {isPending ? 'Sending...' : 'Send'}
-          </motion.button>
-        </div>
-      </motion.form>
+        </motion.form>
+      </div>
 
       <motion.div
         ref={socialsRef}
@@ -180,7 +185,7 @@ export default function Contact() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
       >
-        <p className="text-gray-500 mb-6">(I&apos;m everywhere)</p>
+        <p className="text-gray-500 mb-6">(find me on)</p>
 
         <div className="flex flex-wrap justify-center gap-6">
           {socialLinks.map((link, index) => (
@@ -197,12 +202,18 @@ export default function Contact() {
         </div>
 
         <p className="text-gray-500 text-sm mt-16">
-          For your kind info: this website is designed in{' '}
-          <a href="#" className="text-gray-400 hover:text-white">
-            Figma
+          For your kind info: this website was inspired by{' '}
+          <a
+            href="https://www.lakshb.dev"
+            className="text-gray-400 hover:text-white"
+          >
+            lakshay
           </a>{' '}
           and developed in{' '}
-          <a href="#" className="text-gray-400 hover:text-white">
+          <a
+            href="https://nextjs.org/"
+            className="text-gray-400 hover:text-white"
+          >
             Next.js
           </a>
         </p>

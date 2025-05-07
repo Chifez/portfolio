@@ -1,12 +1,10 @@
 'use client';
-
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 import { useIsMobile } from '../hooks/use-mobile';
 import ImageAnimate from './animations/image-reveal';
 import { imageContainer } from './animations/variants';
-import PageReveal from './animations/page-reveal';
 
 interface SpotifyData {
   isPlaying: boolean;

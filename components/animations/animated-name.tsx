@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { RollingTitles } from '../rolling-title';
 import LetterAnimate from './text-reveal';
 import InfiniteCarousel from './infinite-carousel';

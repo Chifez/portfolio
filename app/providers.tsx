@@ -5,8 +5,8 @@ import { ThemeProvider } from '@/components/theme-provider';
 import CustomCursor from '@/components/cursor';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'sonner';
-
-import { usePathname } from 'next/navigation';
+import { NavigationProvider } from '@/lib/context/navigation-context';
+import PageTransition from '@/components/animations/page-transitions';
 
 interface ProvidersProps {
   children: ReactNode;
@@ -22,15 +22,14 @@ const queryClient = new QueryClient({
 });
 
 export default function Providers({ children }: ProvidersProps) {
-  const pathname = usePathname();
-  const currentSection = pathname.split('/').pop() || 'home';
-
   return (
     <ThemeProvider attribute="class" defaultTheme="dark">
       <QueryClientProvider client={queryClient}>
-        {children}
-        <CustomCursor />
-        <Toaster position="top-right" />
+        <NavigationProvider>
+          <PageTransition>{children}</PageTransition>
+          <CustomCursor />
+          <Toaster position="top-right" />
+        </NavigationProvider>
       </QueryClientProvider>
     </ThemeProvider>
   );

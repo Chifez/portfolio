@@ -11,7 +11,7 @@ const socialLinks = [
     label: 'github',
   },
   {
-    href: 'https://twitter.com',
+    href: 'https://twitter.com/chifez4u',
     label: 'follow on twitter',
   },
   {

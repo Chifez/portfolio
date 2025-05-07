@@ -1,5 +1,6 @@
 'use client';
 
+import { useNavigation } from '@/lib/context/navigation-context';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import Image from 'next/image';
@@ -9,10 +10,8 @@ interface NavigationProps {
   setCurrentSection: (section: string) => void;
 }
 
-export default function Navigation({
-  currentSection,
-  setCurrentSection,
-}: NavigationProps) {
+export default function Navigation() {
+  const { currentSection, navigateTo } = useNavigation();
   const navItems = [
     { id: 'about', label: 'About' },
     { id: 'projects', label: 'Projects' },
@@ -22,7 +21,8 @@ export default function Navigation({
 
   const handleNavClick = (section: string) => {
     console.log('Navigation clicked:', section);
-    setCurrentSection(section);
+    // setCurrentSection(section);
+    navigateTo(section as any);
   };
 
   const handleResumeClick = () => {
