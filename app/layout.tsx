@@ -4,7 +4,7 @@ import './globals.css';
 import Providers from './providers';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://your-domain.com'), // Replace with your actual domain
+  metadataBase: new URL('https://emcodes.xyz'), // Replace with your actual domain
   title: {
     default: 'Nwosu Emmanuel | Full Stack Developer',
     template: '%s | Nwosu Emmanuel',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://your-domain.com',
+    url: 'https://emcodes.xyz',
     title: 'Nwosu Emmanuel | Full Stack Developer',
     description:
       'Full Stack Developer specializing in React, Next.js, and modern web technologies. Building beautiful, performant, and user-friendly web applications.',
@@ -66,10 +66,6 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  },
-  verification: {
-    google: 'your-google-site-verification', // Add your Google verification code
-    yandex: 'your-yandex-verification', // Add your Yandex verification code if needed
   },
 };
 
