@@ -14,9 +14,6 @@ export default function ProjectCursor({ projectImage }: ProjectCursorProps) {
   const [isProjectHovering, setIsProjectHovering] = useState(false);
   const isMobile = useIsMobile();
 
-  // Don't render on mobile
-  if (isMobile) return null;
-
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
@@ -52,6 +49,8 @@ export default function ProjectCursor({ projectImage }: ProjectCursorProps) {
     }
   }, [projectImage]);
 
+  // Don't render on mobile
+  if (isMobile) return null;
   return (
     <>
       <motion.div
