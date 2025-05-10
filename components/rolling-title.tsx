@@ -1,8 +1,5 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-
 import { cn } from '@/lib/utils';
 import { RollingText } from './ui/rolling-text';
 
