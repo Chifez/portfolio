@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { BlogPost } from '@/lib/types';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface BlogProps {
   initialPosts: BlogPost[];
@@ -15,7 +16,7 @@ export default function Blog({ initialPosts }: BlogProps) {
   const postsRef = useRef<HTMLDivElement>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [posts, setPosts] = useState<BlogPost[]>(initialPosts);
-
+  const isMobile = useIsMobile();
   const categories = [
     'All',
     ...Array.from(new Set(posts.map((post) => post.category))),
@@ -51,14 +52,21 @@ export default function Blog({ initialPosts }: BlogProps) {
     <div className="min-h-screen py-20">
       <motion.h1
         ref={headingRef}
-        className="text-6xl font-bold mb-12 opacity-0 text-center tracking-tighter"
+        className="text-6xl font-bold mb-4 opacity-0 text-center tracking-tighter"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         BLOG
       </motion.h1>
-
+      <motion.p
+        className="text-center text-lg text-gray-400 mb-12 opacity-0"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: isMobile ? 0.7 : 0.5, delay: 0.2 }}
+      >
+        I write more than just code
+      </motion.p>
       <div className="flex justify-center mb-12">
         <div className="flex space-x-4">
           {categories.map((category, idx) => (

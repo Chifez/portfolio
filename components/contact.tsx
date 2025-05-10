@@ -115,7 +115,7 @@ export default function Contact() {
           LET&apos;S TALK!
         </motion.h1>
         <motion.p
-          className="text-xl text-gray-400 mb-12 opacity-0"
+          className="text-lg text-gray-400 mb-12 opacity-0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: isMobile ? 0.7 : 0.5, delay: 0.2 }}
