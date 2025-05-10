@@ -5,3 +5,19 @@ export interface Project {
   link?: string;
   image?: string;
 }
+export interface BlogPost {
+  _id?: string;
+  id: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  date: string;
+  readTime: string;
+  category: string;
+  image: string;
+  author?: {
+    name: string;
+    avatar?: string;
+  };
+  tags?: string[];
+}

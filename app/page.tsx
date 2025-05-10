@@ -16,10 +16,16 @@ export default function Page() {
 
   useEffect(() => {
     // Simulate loading
-    const timer = setTimeout(() => {
+    const hasLoaded = sessionStorage.getItem('hasLoaded');
+    let timer: NodeJS.Timeout;
+    if (hasLoaded) {
       setIsLoading(false);
-    }, 2000);
-
+    } else {
+      timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+      sessionStorage.setItem('hasLoaded', 'true');
+    }
     return () => clearTimeout(timer);
   }, []);
 

@@ -3,6 +3,7 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigation } from '@/lib/context/navigation-context';
+import CustomCursor from '../cursor';
 
 export default function PageTransition({ children }: { children: ReactNode }) {
   const { isTransitioning } = useNavigation();
@@ -34,6 +35,7 @@ export default function PageTransition({ children }: { children: ReactNode }) {
 
   return (
     <>
+      <CustomCursor />
       {/* Page content */}
       <div className="w-full">{displayedChildren}</div>
 

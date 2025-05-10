@@ -4,6 +4,9 @@ import { useNavigation } from '@/lib/context/navigation-context';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
+import Logo from './logo';
+import { useRouter } from 'next/navigation';
 
 interface NavigationProps {
   currentSection: string;
@@ -15,10 +18,12 @@ export default function Navigation() {
   const navItems = [
     { id: 'about', label: 'About' },
     { id: 'projects', label: 'Projects' },
+    { id: 'blog', label: 'Blog' },
     { id: 'contact', label: 'Contact' },
     { id: 'resume', label: 'Résumé' },
   ];
 
+  const router = useRouter();
   const handleNavClick = (section: string) => {
     console.log('Navigation clicked:', section);
     // setCurrentSection(section);
@@ -33,20 +38,36 @@ export default function Navigation() {
     if (currentSection === 'home') {
       return (
         <>
-          <div className="z-20 px-4 fixed top-8 md:left-8 flex flex-row items-end lg:items-start justify-between w-screen md:w-fit lg:flex-col space-y-4">
-            {navItems.map((item) => (
-              <motion.button
-                key={item.id}
-                className="cursor-pointer nav-link text-left text-xs text-gray-500 hover:text-gray-300"
-                onClick={() => handleNavClick(item.id)}
-                whileHover={{ x: 5 }}
-                transition={{ duration: 0.2 }}
-              >
-                {item.label}
-              </motion.button>
-            ))}
+          <div className="fixed top-8 left-8 z-40">
+            <Logo size={48} />
           </div>
-          <div
+          <div className="z-20 px-4 fixed top-8 md:right-8 flex flex-col lg:flex-row items-end justify-between w-screen md:w-fit lg:gap-4 space-y-2">
+            {navItems.map((item) =>
+              item.id === 'blog' ? (
+                <motion.button
+                  onClick={() => router.push('/blog')}
+                  key={item.id}
+                  className="cursor-pointer nav-link text-left text-xs text-gray-500 hover:text-gray-300"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {item.label}
+                </motion.button>
+              ) : (
+                <motion.button
+                  key={item.id}
+                  className="cursor-pointer nav-link text-left text-xs text-gray-500 hover:text-gray-300"
+                  onClick={() => navigateTo(item.id as any)}
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {item.label}
+                </motion.button>
+              )
+            )}
+          </div>
+
+          {/* <div
             onClick={() => handleNavClick('about')}
             className="hidden md:block fixed top-8 right-8"
           >
@@ -62,7 +83,7 @@ export default function Navigation() {
                 reveal me
               </div>
             </div>
-          </div>
+          </div> */}
         </>
       );
     }

@@ -27,7 +27,7 @@ export default function Providers({ children }: ProvidersProps) {
       <QueryClientProvider client={queryClient}>
         <NavigationProvider>
           <PageTransition>{children}</PageTransition>
-          <CustomCursor />
+
           <Toaster position="top-right" />
         </NavigationProvider>
       </QueryClientProvider>
