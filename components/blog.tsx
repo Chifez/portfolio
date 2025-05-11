@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import EmptyState from './empty-state';
 import { BlogPost } from '@/lib/types';
+import { formatDate } from '@/lib/helpers';
 
 interface BlogProps {
   initialPosts: BlogPost[];
@@ -62,9 +63,9 @@ export default function Blog({ initialPosts }: BlogProps) {
 
       <div className="flex justify-center mb-12">
         <div className="flex flex-wrap justify-center gap-4">
-          {categories.map((category) => (
+          {categories.map((category, index) => (
             <motion.button
-              key={category}
+              key={index}
               className={`px-4 py-2 rounded-sm transition-colors ${
                 selectedCategory === category
                   ? 'bg-gray-800 text-white'
@@ -88,8 +89,8 @@ export default function Blog({ initialPosts }: BlogProps) {
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         {filteredPosts.length > 0 ? (
-          filteredPosts.map((post) => (
-            <Link href={`/blog/${post.id}`} key={post.id}>
+          filteredPosts.map((post, index) => (
+            <Link href={`/blog/${post._id}`} key={index}>
               <motion.article
                 className="group cursor-pointer"
                 whileHover={{ y: -5 }}
@@ -107,7 +108,7 @@ export default function Blog({ initialPosts }: BlogProps) {
                   </div>
                 </div>
                 <div className="flex justify-between text-gray-500 text-sm mb-2">
-                  <span>{post.date}</span>
+                  <span>{formatDate(post.createdAt)}</span>
                   <span>{post.readTime}</span>
                 </div>
                 <h2 className="text-2xl font-bold mb-2 group-hover:text-gray-300 transition-colors">

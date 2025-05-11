@@ -8,6 +8,7 @@ import { ChevronLeft } from 'lucide-react';
 import type { BlogPost as BlogPostType } from '@/lib/types';
 import { useNavigation } from '@/lib/context/navigation-context';
 import { useRouter } from 'next/navigation';
+import { formatDate } from '@/lib/helpers';
 
 interface BlogPostProps {
   post: BlogPostType;
@@ -78,7 +79,7 @@ export default function BlogPost({ post }: BlogPostProps) {
                 {post.author?.name || 'Anonymous'}
               </div>
               <div className="text-xs text-gray-500">
-                {post.date} · {post.readTime}
+                {formatDate(post.createdAt)} · {post.readTime}
               </div>
             </div>
           </div>
