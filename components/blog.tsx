@@ -90,7 +90,7 @@ export default function Blog({ initialPosts }: BlogProps) {
       >
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post, index) => (
-            <Link href={`/blog/${post._id}`} key={index}>
+            <Link href={`/blog/${post.id}`} key={index}>
               <motion.article
                 className="group cursor-pointer"
                 whileHover={{ y: -5 }}
