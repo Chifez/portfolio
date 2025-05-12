@@ -88,7 +88,7 @@ export default function BlogPost({ post }: BlogPostProps) {
 
           <div className="relative h-[400px] mb-8 rounded-md overflow-hidden">
             <Image
-              src={post.image || '/placeholder.svg'}
+              src={post.image.url || '/placeholder.svg'}
               alt={post.title}
               fill
               className="object-cover"

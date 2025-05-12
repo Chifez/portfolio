@@ -103,8 +103,8 @@ export default function Contact() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row justify-center lg:justify-evenly items-center lg:items-end px-4 lg:px-0 py-20">
-      <div>
+    <div className="min-h-screen  w-full flex flex-col lg:flex-row justify-center lg:justify-evenly items-center lg:items-end px-4 lg:px-0 py-20">
+      <div className="w-full lg:w-fit">
         <motion.h1
           ref={headingRef}
           className="text-5xl lg:text-6xl font-bold mb-4 opacity-0"
@@ -125,7 +125,7 @@ export default function Contact() {
         <motion.form
           ref={formRef}
           onSubmit={handleSubmit}
-          className="w-full max-w-lg opacity-0"
+          className="w-full opacity-0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: isMobile ? 0.7 : 0.5, delay: 0.4 }}
@@ -180,7 +180,7 @@ export default function Contact() {
 
       <motion.div
         ref={socialsRef}
-        className="mt-20 text-center opacity-0"
+        className="mt-20 text-center opacity-0 w-full lg:w-fit"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}

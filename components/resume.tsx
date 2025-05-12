@@ -56,7 +56,17 @@ export default function Resume() {
           <p className="text-xl text-gray-400">FRONTEND ENGINEER</p>
 
           <div className="space-y-1 text-gray-400">
-            <p>Email: nwosuifeanyiemmanuel01@gmail.com</p>
+            <p>
+              Email:{' '}
+              <Link
+                href="mailto:nwosuifeanyiemmanuel01@gmail.com"
+                className="text-gray-300 hover:text-white underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                nwosuifeanyiemmanuel01@gmail.com
+              </Link>
+            </p>
             <p>
               Linkedin:{' '}
               <Link
@@ -206,27 +216,46 @@ export default function Resume() {
           <h2 className="text-2xl font-semibold text-white">PROJECTS</h2>
           <ul className="space-y-2 text-gray-300">
             <li>
-              ● Course-Builder (React, typescript, socketIO, Nodejs): 6+
-              Deployment ready simple LMS web app templates.
+              ●{' '}
+              <Link href="#" className="hover:underline">
+                Course-Builder
+              </Link>{' '}
+              (React, typescript, socketIO, Nodejs): 6+ Deployment ready simple
+              LMS web app templates.
             </li>
             <li>
-              ● AssignGPT (Nextjs, typescript, Vercel AI sdk, Supabase):
-              Leveraging the power of Generative UI to build a chat App(like
-              chatGPT) that generates a quiz UI and quizzes you on your
-              preferred topic on the fly.
+              ●{' '}
+              <Link href="#" className="hover:underline">
+                AssignGPT
+              </Link>{' '}
+              (Nextjs, typescript, Vercel AI sdk, Supabase): Leveraging the
+              power of Generative UI to build a chat App(like chatGPT) that
+              generates a quiz UI and quizzes you on your preferred topic on the
+              fly.
             </li>
             <li>
-              ● Convertly (Nextjs, typescript, Nodejs, Expressjs, MongoDB):
-              Convert your speech to text on the go with Convertly.
+              ●{' '}
+              <Link href="#" className="hover:underline">
+                Convertly
+              </Link>{' '}
+              (Nextjs, typescript, Nodejs, Expressjs, MongoDB): Convert your
+              speech to text on the go with Convertly.
             </li>
             <li>
-              ● Main stack dashboard (Nextjs, typescript, Vitest): A desktop
-              version of the main stack dashboard with unit test.
+              ●{' '}
+              <Link href="#" className="hover:underline">
+                Main stack dashboard
+              </Link>{' '}
+              (Nextjs, typescript, Vitest): A desktop version of the main stack
+              dashboard with unit test.
             </li>
             <li>
-              ● CLI-Template-Starter (Javascript, Nodejs, YAML, NPM): A cli tool
-              for scaffolding frontend projects quickly using a framework of
-              choice.
+              ●{' '}
+              <Link href="#" className="hover:underline">
+                CLI-Template-Starter
+              </Link>{' '}
+              (Javascript, Nodejs, YAML, NPM): A cli tool for scaffolding
+              frontend projects quickly using a framework of choice.
             </li>
           </ul>
         </div>

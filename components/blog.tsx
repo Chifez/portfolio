@@ -7,6 +7,8 @@ import Image from 'next/image';
 import EmptyState from './empty-state';
 import { BlogPost } from '@/lib/types';
 import { formatDate } from '@/lib/helpers';
+import { ChevronLeft } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 interface BlogProps {
   initialPosts: BlogPost[];
@@ -15,6 +17,7 @@ interface BlogProps {
 export default function Blog({ initialPosts }: BlogProps) {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const postsRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [posts, setPosts] = useState<BlogPost[]>(initialPosts);
 
@@ -50,16 +53,36 @@ export default function Blog({ initialPosts }: BlogProps) {
   }, []);
 
   return (
-    <div className="min-h-screen py-20">
+    <div className="min-h-screen py-10 lg:py-20 px-4">
+      <div className="mb-8 ">
+        <motion.button
+          className="flex items-center text-gray-400 hover:text-white transition-colors"
+          onClick={() => router.push('/')}
+          whileHover={{ x: -5 }}
+          transition={{ duration: 0.2 }}
+        >
+          <ChevronLeft className="w-4 h-4 mr-2" />
+          Back to Home
+        </motion.button>
+      </div>
       <motion.h1
         ref={headingRef}
-        className="text-6xl font-bold mb-12 opacity-0 text-center tracking-tighter"
+        className="text-6xl font-bold mb-4 opacity-0 text-center tracking-tighter"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         BLOG
       </motion.h1>
+      <motion.p
+        ref={headingRef}
+        className="mb-10 opacity-0 text-center tracking-tighter"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        I write more than just code
+      </motion.p>
 
       <div className="flex justify-center mb-12">
         <div className="flex flex-wrap justify-center gap-4">
@@ -83,14 +106,14 @@ export default function Blog({ initialPosts }: BlogProps) {
 
       <motion.div
         ref={postsRef}
-        className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto px-4 opacity-0"
+        className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto opacity-0"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post, index) => (
-            <Link href={`/blog/${post.id}`} key={index}>
+            <Link href={`/blog/${post._id}`} key={index}>
               <motion.article
                 className="group cursor-pointer"
                 whileHover={{ y: -5 }}
@@ -98,7 +121,7 @@ export default function Blog({ initialPosts }: BlogProps) {
               >
                 <div className="relative h-64 mb-6 overflow-hidden">
                   <Image
-                    src={post.image || '/placeholder.svg'}
+                    src={post.image.url || '/placeholder.svg'}
                     alt={post.title}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
