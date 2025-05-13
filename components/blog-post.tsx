@@ -9,6 +9,7 @@ import type { BlogPost as BlogPostType } from '@/lib/types';
 import { useNavigation } from '@/lib/context/navigation-context';
 import { useRouter } from 'next/navigation';
 import { formatDate } from '@/lib/helpers';
+import LikeButton from './like-button';
 
 interface BlogPostProps {
   post: BlogPostType;
@@ -42,7 +43,7 @@ export default function BlogPost({ post }: BlogPostProps) {
   }, []);
 
   return (
-    <div className="min-h-screen py-20 px-4">
+    <div className="min-h-screen py-10 lg:py-20 px-4">
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
           <motion.button
@@ -95,15 +96,18 @@ export default function BlogPost({ post }: BlogPostProps) {
             />
           </div>
 
-          <div className="flex flex-wrap gap-2 mb-8">
-            {post.tags?.map((tag) => (
-              <span
-                key={tag}
-                className="px-3 py-1 bg-gray-800 text-gray-300 text-sm rounded-sm"
-              >
-                {tag}
-              </span>
-            ))}
+          <div className="flex flex-wrap items-center gap-4 mb-8">
+            <div className="flex flex-wrap gap-2">
+              {post.tags?.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 bg-gray-800 text-gray-300 text-sm rounded-sm"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <LikeButton postId={post._id || post.id} className="ml-auto" />
           </div>
         </motion.div>
 

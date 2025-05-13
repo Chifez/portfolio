@@ -1,23 +1,21 @@
 'use server';
 
-import clientPromise from '@/lib/mongodb';
+import connectDB from '@/lib/mongodb';
+import { Post } from '../models/post';
 import { BlogPost } from '../types';
-import { ObjectId } from 'mongodb';
 import { fallbackPosts } from '../data';
 
 // Function to get all blog posts
 export async function getBlogPosts(): Promise<BlogPost[]> {
   try {
-    const client = await clientPromise;
-    const db = client.db('test');
-    const posts = await db
-      .collection('posts')
-      .find({ isPublished: true })
-      .toArray();
+    await connectDB();
+    const posts = await Post.find({ isPublished: true })
+      .sort({ createdAt: -1 })
+      .lean();
 
     // If we have posts in the database, return them
     if (posts && posts.length > 0) {
-      return JSON.parse(JSON.stringify(posts)) as unknown as BlogPost[];
+      return JSON.parse(JSON.stringify(posts)) as BlogPost[];
     }
 
     // Otherwise, return fallback data
@@ -37,15 +35,12 @@ export async function getBlogPostById(id: string): Promise<BlogPost | null> {
       return null;
     }
 
-    const client = await clientPromise;
-    const db = client.db('test');
-    const post = await db
-      .collection('posts')
-      .findOne({ _id: new ObjectId(id) });
+    await connectDB();
+    const post = await Post.findById(id).lean();
 
     // If we found the post in the database, return it
     if (post) {
-      return JSON.parse(JSON.stringify(post)) as unknown as BlogPost;
+      return JSON.parse(JSON.stringify(post)) as BlogPost;
     }
 
     // Otherwise, look for it in the fallback data
