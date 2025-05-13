@@ -10,6 +10,8 @@ import { useNavigation } from '@/lib/context/navigation-context';
 import { useRouter } from 'next/navigation';
 import { formatDate } from '@/lib/helpers';
 import LikeButton from './like-button';
+import ShareButton from './share-button';
+import { Separator } from './ui/separator';
 
 interface BlogPostProps {
   post: BlogPostType;
@@ -59,7 +61,7 @@ export default function BlogPost({ post }: BlogPostProps) {
 
         <motion.div
           ref={headerRef}
-          className="mb-12 opacity-0"
+          className="mb-10 lg:mb-12 opacity-0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -85,7 +87,7 @@ export default function BlogPost({ post }: BlogPostProps) {
             </div>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">{post.title}</h1>
+          <h1 className="text-3xl md:text-5xl font-bold mb-6">{post.title}</h1>
 
           <div className="relative h-[400px] mb-8 rounded-md overflow-hidden">
             <Image
@@ -96,7 +98,7 @@ export default function BlogPost({ post }: BlogPostProps) {
             />
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 mb-8">
+          <div className="flex flex-col md:flex-row items-start justify-between gap-8 md:gap-0">
             <div className="flex flex-wrap gap-2">
               {post.tags?.map((tag) => (
                 <span
@@ -107,7 +109,13 @@ export default function BlogPost({ post }: BlogPostProps) {
                 </span>
               ))}
             </div>
-            <LikeButton postId={post._id || post.id} className="ml-auto" />
+            <div className="flex items-center gap-2">
+              <LikeButton postId={post._id || post.id} />
+              <ShareButton
+                url={`${typeof window !== 'undefined' ? window.location.href : ''}`}
+                title={post.title}
+              />
+            </div>
           </div>
         </motion.div>
 
@@ -122,37 +130,12 @@ export default function BlogPost({ post }: BlogPostProps) {
 
         <div className="mt-16 pt-8 border-t border-gray-800">
           <h3 className="text-xl font-bold mb-4">Share this post</h3>
-          <div className="flex space-x-4">
-            <Link
-              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(
-                `${typeof window !== 'undefined' ? window.location.href : ''}`
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              Twitter
-            </Link>
-            <Link
-              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-                `${typeof window !== 'undefined' ? window.location.href : ''}`
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              LinkedIn
-            </Link>
-            <Link
-              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                `${typeof window !== 'undefined' ? window.location.href : ''}`
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              Facebook
-            </Link>
+          <div className="flex items-center gap-4 my-4">
+            <ShareButton
+              url={`${typeof window !== 'undefined' ? window.location.href : ''}`}
+              title={post.title}
+            />
+            <LikeButton postId={post._id || post.id} />
           </div>
         </div>
       </div>
