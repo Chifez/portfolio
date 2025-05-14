@@ -19,7 +19,6 @@ export default function Blog({ initialPosts: posts }: BlogProps) {
   const postsRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  // const [posts, setPosts] = useState<BlogPost[]>(initialPosts);
 
   const categories = [
     'All',
@@ -125,6 +124,7 @@ export default function Blog({ initialPosts: posts }: BlogProps) {
                     src={post.image.url || '/placeholder.svg'}
                     alt={post.title}
                     fill
+                    priority
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute bottom-0 left-0 bg-black bg-opacity-70 px-4 py-2">

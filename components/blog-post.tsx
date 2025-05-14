@@ -3,22 +3,18 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import type { BlogPost as BlogPostType } from '@/lib/types';
-import { useNavigation } from '@/lib/context/navigation-context';
 import { useRouter } from 'next/navigation';
 import { formatDate } from '@/lib/helpers';
 import LikeButton from './like-button';
 import ShareButton from './share-button';
-import { Separator } from './ui/separator';
 
 interface BlogPostProps {
   post: BlogPostType;
 }
 
 export default function BlogPost({ post }: BlogPostProps) {
-  const { navigateTo } = useNavigation();
   const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -74,6 +70,7 @@ export default function BlogPost({ post }: BlogPostProps) {
                 }
                 alt={post.author?.name || 'Author'}
                 fill
+                priority
                 className="object-cover"
               />
             </div>

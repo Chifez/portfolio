@@ -1,9 +1,9 @@
 import { getBlogPostById } from '@/lib/actions/blog-actions';
 import { notFound } from 'next/navigation';
+import { Metadata, ResolvingMetadata } from 'next';
+import BlogPost from '@/components/blog-post';
 import { Suspense } from 'react';
 import BlogPostLoading from './loading';
-import { Metadata, ResolvingMetadata } from 'next';
-import BlogPostContent from '@/components/blog-post-content';
 
 interface PageProps {
   params: {
@@ -97,6 +97,15 @@ export async function generateMetadata(
       images: [postImageUrl],
     },
   };
+}
+
+// Separate component for the blog post content to use with Suspense
+async function BlogPostContent({ id }: { id: string }) {
+  const post = await getBlogPostById(id);
+  if (!post) {
+    notFound();
+  }
+  return <BlogPost post={post} />;
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
