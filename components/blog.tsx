@@ -14,12 +14,12 @@ interface BlogProps {
   initialPosts: BlogPost[];
 }
 
-export default function Blog({ initialPosts }: BlogProps) {
+export default function Blog({ initialPosts: posts }: BlogProps) {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const postsRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [posts, setPosts] = useState<BlogPost[]>(initialPosts);
+  // const [posts, setPosts] = useState<BlogPost[]>(initialPosts);
 
   const categories = [
     'All',

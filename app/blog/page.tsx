@@ -1,8 +1,7 @@
-import { getBlogPosts } from '@/lib/actions/blog-actions';
-import Blog from '@/components/blog';
 import { Suspense } from 'react';
 import BlogLoading from './loading';
 import { Metadata } from 'next';
+import BlogContent from '@/components/blog-content';
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -22,11 +21,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function BlogPage() {
-  const posts = await getBlogPosts();
+export default function BlogPage() {
   return (
     <Suspense fallback={<BlogLoading />}>
-      <Blog initialPosts={posts} />
+      <BlogContent />
     </Suspense>
   );
 }
