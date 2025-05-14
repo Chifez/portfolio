@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useIsMobile } from '@/hooks/use-mobile';
+import Image from 'next/image';
 
 interface ProjectCursorProps {
   projectImage?: string;
@@ -103,9 +104,11 @@ export default function ProjectCursor({ projectImage }: ProjectCursorProps) {
                 ease: 'easeInOut',
               }}
             >
-              <img
+              <Image
                 src={projectImage}
                 alt="Project preview"
+                fill
+                priority
                 className="w-full h-full object-cover rounded-xl"
               />
             </motion.div>

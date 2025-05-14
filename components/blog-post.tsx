@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ChevronLeft } from 'lucide-react';
@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { formatDate } from '@/lib/helpers';
 import LikeButton from './like-button';
 import ShareButton from './share-button';
+import { blurDataURL } from '@/lib/data';
 
 interface BlogPostProps {
   post: BlogPostType;
@@ -18,6 +19,7 @@ export default function BlogPost({ post }: BlogPostProps) {
   const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -41,11 +43,11 @@ export default function BlogPost({ post }: BlogPostProps) {
   }, []);
 
   return (
-    <div className="min-h-screen py-10 lg:py-20 px-4">
+    <div className="min-h-screen py-10 px-4">
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
           <motion.button
-            className="flex items-center text-gray-400 hover:text-white transition-colors"
+            className="flex text-xs items-center text-gray-400 hover:text-white transition-colors"
             onClick={() => router.back()}
             whileHover={{ x: -5 }}
             transition={{ duration: 0.2 }}
@@ -71,6 +73,7 @@ export default function BlogPost({ post }: BlogPostProps) {
                 alt={post.author?.name || 'Author'}
                 fill
                 priority
+                sizes="40px"
                 className="object-cover"
               />
             </div>
@@ -86,12 +89,24 @@ export default function BlogPost({ post }: BlogPostProps) {
 
           <h1 className="text-3xl md:text-5xl font-bold mb-6">{post.title}</h1>
 
-          <div className="relative h-[400px] mb-8 rounded-md overflow-hidden">
+          <div className="relative h-[400px] mb-8 rounded-md overflow-hidden bg-gray-800/50">
+            <div
+              className={`absolute inset-0 bg-gray-800 animate-pulse ${
+                imageLoaded ? 'opacity-0' : 'opacity-100'
+              } transition-opacity duration-300`}
+            />
             <Image
               src={post.image.url || '/placeholder.svg'}
               alt={post.title}
               fill
+              priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 768px, 1200px"
+              quality={90}
+              placeholder="blur"
+              blurDataURL={blurDataURL}
               className="object-cover"
+              onLoad={() => setImageLoaded(true)}
+              style={{ opacity: imageLoaded ? 1 : 0 }}
             />
           </div>
 

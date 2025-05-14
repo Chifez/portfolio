@@ -1,5 +1,9 @@
 import { BlogPost, Project } from './types';
 
+// A base64-encoded SVG that creates a 400x300 pixel gray rectangle
+// This is used as a blur placeholder for images while they load
+export const blurDataURL = `data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgNDAwIDMwMCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzMzMzMzMyIvPjwvc3ZnPg==`;
+
 export const projects: Project[] = [
   {
     title: 'ASSIGNGPT',

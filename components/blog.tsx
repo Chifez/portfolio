@@ -9,6 +9,7 @@ import { BlogPost } from '@/lib/types';
 import { formatDate } from '@/lib/helpers';
 import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { blurDataURL } from '@/lib/data';
 
 interface BlogProps {
   initialPosts: BlogPost[];
@@ -19,7 +20,13 @@ export default function Blog({ initialPosts: posts }: BlogProps) {
   const postsRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-
+  const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({});
+  const handleImageLoad = (postId: string) => {
+    setImagesLoaded((prev) => ({
+      ...prev,
+      [postId]: true,
+    }));
+  };
   const categories = [
     'All',
     ...Array.from(new Set(posts.map((post) => post.category))),
@@ -53,10 +60,10 @@ export default function Blog({ initialPosts: posts }: BlogProps) {
   }, []);
 
   return (
-    <div className="min-h-screen py-10 lg:py-20 px-4">
-      <div className="mb-8 ">
+    <div className="min-h-screen py-10 px-4">
+      <div className="mb-4">
         <motion.button
-          className="flex items-center text-gray-400 hover:text-white transition-colors"
+          className="flex text-xs items-center text-gray-400 hover:text-white transition-colors"
           onClick={() => router.push('/')}
           whileHover={{ x: -5 }}
           transition={{ duration: 0.2 }}
@@ -120,12 +127,20 @@ export default function Blog({ initialPosts: posts }: BlogProps) {
                 transition={{ duration: 0.2 }}
               >
                 <div className="relative h-64 mb-6 overflow-hidden">
+                  <div
+                    className={`absolute inset-0 bg-gray-800 animate-pulse ${imagesLoaded[post.id] ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+                  />
+
                   <Image
                     src={post.image.url || '/placeholder.svg'}
                     alt={post.title}
                     fill
-                    priority
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    quality={85}
+                    placeholder="blur"
+                    blurDataURL={blurDataURL}
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    onLoad={() => handleImageLoad(post.id)}
                   />
                   <div className="absolute bottom-0 left-0 bg-black bg-opacity-70 px-4 py-2">
                     <span className="text-sm text-white">{post.category}</span>

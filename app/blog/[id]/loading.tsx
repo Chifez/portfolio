@@ -3,10 +3,10 @@ import { ChevronLeft } from 'lucide-react';
 
 export default function BlogPostLoading() {
   return (
-    <div className="min-h-screen py-20 px-4">
+    <div className="min-h-screen py-10 px-4">
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
-          <button className="flex items-center text-gray-400 hover:text-white transition-colors">
+          <button className="flex text-xs items-center text-gray-400 hover:text-white transition-colors">
             <ChevronLeft className="w-4 h-4 mr-2" />
             Back to all posts
           </button>
