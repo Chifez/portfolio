@@ -9,7 +9,14 @@ export const projects: Project[] = [
     title: 'ASSIGNGPT',
     description:
       'A GPT-4 based AI assistant for people to get quizzes on any subject',
-    technologies: ['NEXTJS', 'TYPESCRIPT', 'TAILWINDCSS', 'OPENAI API'],
+    technologies: [
+      'NEXTJS',
+      'TYPESCRIPT',
+      'SUPABASE',
+      'TAILWINDCSS',
+      'VERCEL AI SDK',
+      'OPENAI API',
+    ],
     link: 'https://assign-gpt.vercel.app/',
     image: '/assign.png',
   },
@@ -47,7 +54,7 @@ export const projects: Project[] = [
   {
     title: 'ENSUBEB',
     description:
-      'A website and admin dashboard for the Ensubeb, a Nigerian government agency that oversees the primary education in ENUGU STATE',
+      'A website and Admin dashboard for Ensubeb, a Nigerian government agency that oversees the primary education in ENUGU STATE',
     technologies: [
       'NEXTJS',
       'TYPESCRIPT',
