@@ -29,7 +29,6 @@ export default function Page() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Simple section renderer
   const renderSection = () => {
     switch (currentSection) {
       case 'home':
@@ -78,7 +77,7 @@ function LoadingPercentage() {
 
   useEffect(() => {
     const startTime = Date.now();
-    const totalDuration = 2000; // 2 seconds for loading
+    const totalDuration = 2000;
 
     const updateProgress = () => {
       const elapsed = Date.now() - startTime;

@@ -8,7 +8,6 @@ export async function POST(request: Request) {
   try {
     const { name, email, message } = await request.json();
 
-    // Basic validation
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: 'Name, email, and message are required' },

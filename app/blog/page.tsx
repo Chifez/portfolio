@@ -22,7 +22,6 @@ export const metadata: Metadata = {
   },
 };
 
-// Separate component for the blog content to use with Suspense
 async function BlogContent() {
   const posts = await getBlogPosts();
   return <Blog initialPosts={posts} />;

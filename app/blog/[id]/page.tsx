@@ -15,13 +15,9 @@ type Props = {
   params: { id: string };
 };
 
-// Helper function to ensure image URL is absolute and properly formatted
 function getAbsoluteImageUrl(url: string, metadataBase: URL): string {
-  // If the URL is already absolute (starts with http:// or https://), return it
   if (url.startsWith('http://') || url.startsWith('https://')) {
-    // If it's a Cloudinary URL, ensure it's optimized for social cards
     if (url.includes('cloudinary.com')) {
-      // Add Cloudinary transformations for social cards if not already present
       if (!url.includes('/c_fill')) {
         const separator = url.includes('?') ? '&' : '?';
         return `${url}${separator}c_fill,w_1200,h_630,q_auto,f_auto`;
@@ -57,7 +53,7 @@ export async function generateMetadata(
   const parentMetadata = await parent;
   const metadataBase = parentMetadata.metadataBase as URL;
   const defaultImage = {
-    url: '/opengraph-image.jpg',
+    url: '/opengraph-image.png',
     width: 1200,
     height: 630,
     alt: 'Nwosu Emmanuel - Full Stack Developer',

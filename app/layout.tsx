@@ -4,7 +4,7 @@ import './globals.css';
 import Providers from './providers';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://emcodes.xyz'), // Replace with your actual domain
+  metadataBase: new URL('https://emcodes.xyz'),
   title: {
     default: 'Nwosu Emmanuel | Full Stack Developer',
     template: '%s | Nwosu Emmanuel',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     siteName: 'Nwosu Emmanuel Portfolio',
     images: [
       {
-        url: '/opengraph-image.jpg', // Add your OG image
+        url: '/opengraph-image.png',
         width: 1200,
         height: 630,
         alt: 'Nwosu Emmanuel - Full Stack Developer',
@@ -53,8 +53,8 @@ export const metadata: Metadata = {
     title: 'Nwosu Emmanuel | Full Stack Developer',
     description:
       'Full Stack Developer specializing in React, Next.js, and modern web technologies.',
-    images: ['/twitter-image.jpg'], // Add your Twitter card image
-    creator: '@chifez4u', // Add your Twitter handle
+    images: ['/twitter-image.png'],
+    creator: '@chifez4u',
   },
   robots: {
     index: true,

@@ -3,15 +3,8 @@
 import { useNavigation } from '@/lib/context/navigation-context';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Download } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
 import Logo from './logo';
 import { useRouter } from 'next/navigation';
-
-interface NavigationProps {
-  currentSection: string;
-  setCurrentSection: (section: string) => void;
-}
 
 export default function Navigation() {
   const { currentSection, navigateTo } = useNavigation();
@@ -26,7 +19,6 @@ export default function Navigation() {
   const router = useRouter();
   const handleNavClick = (section: string) => {
     console.log('Navigation clicked:', section);
-    // setCurrentSection(section);
     navigateTo(section as any);
   };
 
