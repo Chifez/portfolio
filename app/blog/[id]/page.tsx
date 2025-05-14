@@ -15,6 +15,24 @@ type Props = {
   params: { id: string };
 };
 
+// Helper function to ensure image URL is absolute and properly formatted
+function getAbsoluteImageUrl(url: string, metadataBase: URL): string {
+  // If the URL is already absolute (starts with http:// or https://), return it
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    // If it's a Cloudinary URL, ensure it's optimized for social cards
+    if (url.includes('cloudinary.com')) {
+      // Add Cloudinary transformations for social cards if not already present
+      if (!url.includes('/c_fill')) {
+        const separator = url.includes('?') ? '&' : '?';
+        return `${url}${separator}c_fill,w_1200,h_630,q_auto,f_auto`;
+      }
+    }
+    return url;
+  }
+  // If it's a relative URL, resolve it against the metadata base
+  return new URL(url, metadataBase).toString();
+}
+
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
@@ -35,8 +53,20 @@ export async function generateMetadata(
     };
   }
 
-  // Get the parent metadata
-  const previousImages = (await parent).openGraph?.images || [];
+  // Get the parent metadata and base URL
+  const parentMetadata = await parent;
+  const metadataBase = parentMetadata.metadataBase as URL;
+  const defaultImage = {
+    url: '/opengraph-image.jpg',
+    width: 1200,
+    height: 630,
+    alt: 'Nwosu Emmanuel - Full Stack Developer',
+  };
+
+  // Get the post image URL, ensuring it's absolute
+  const postImageUrl = post.image?.url
+    ? getAbsoluteImageUrl(post.image.url, metadataBase)
+    : getAbsoluteImageUrl(defaultImage.url, metadataBase);
 
   return {
     title: post.title,
@@ -51,15 +81,20 @@ export async function generateMetadata(
       authors: [post.author?.name || 'Nwosu Emmanuel'],
       tags: post.tags,
       url: `https://emcodes.xyz/blog/${post.id}`,
-      images: post.image
-        ? [{ url: post.image.url, width: 1200, height: 630, alt: post.title }]
-        : previousImages,
+      images: [
+        {
+          url: postImageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.excerpt,
-      images: post.image ? [post.image.url] : '/twitter-image.png',
+      images: [postImageUrl],
     },
   };
 }
