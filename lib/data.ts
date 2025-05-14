@@ -14,7 +14,7 @@ export const projects: Project[] = [
     description:
       'A personal blogging website, where I write about my experiences and thoughts',
     technologies: ['TAILWINDCSS', 'SVELTE', 'TYPESCRIPT', 'MONGODB', 'NODEJS'],
-    link: 'https://echo-chifez.vercel.app/',
+    link: 'https://echo-chifez.netlify.app/',
     image: '/echo.png',
   },
   {
