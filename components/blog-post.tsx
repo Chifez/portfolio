@@ -48,7 +48,7 @@ export default function BlogPost({ post }: BlogPostProps) {
         <div className="mb-8">
           <motion.button
             className="flex text-xs items-center text-gray-400 hover:text-white transition-colors"
-            onClick={() => router.back()}
+            onClick={() => router.push('/blog')}
             whileHover={{ x: -5 }}
             transition={{ duration: 0.2 }}
           >
