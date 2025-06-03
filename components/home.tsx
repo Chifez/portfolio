@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import AnimatedName from './animations/animated-name';
@@ -21,31 +20,6 @@ const socialLinks = [
 ];
 
 export default function Home() {
-  const nameRef = useRef<HTMLHeadingElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (nameRef.current) {
-      observer.observe(nameRef.current);
-    }
-
-    return () => {
-      if (nameRef.current) {
-        observer.unobserve(nameRef.current);
-      }
-    };
-  }, []);
-
   return (
     <div className="cursor-pointer min-h-screen flex flex-col">
       <div className="mt-40 px-2 lg:px-4">

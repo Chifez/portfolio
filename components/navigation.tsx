@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import Logo from './logo';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function Navigation() {
   const { currentSection, navigateTo } = useNavigation();
@@ -37,13 +38,14 @@ export default function Navigation() {
             {navItems.map((item) =>
               item.id === 'blog' ? (
                 <motion.button
-                  onClick={() => router.push('/blog')}
                   key={item.id}
                   className="cursor-pointer nav-link text-left text-xs text-gray-500 hover:text-gray-300"
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.2 }}
                 >
-                  {item.label}
+                  <Link href="/blog" prefetch={true}>
+                    {item.label}
+                  </Link>
                 </motion.button>
               ) : (
                 <motion.button

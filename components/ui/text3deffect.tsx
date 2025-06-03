@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -22,20 +22,21 @@ export function Text3DEffect({
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (containerRef.current) {
-        const { left, top, width, height } =
-          containerRef.current.getBoundingClientRect();
-        const x = (e.clientX - left - width / 2) / 25;
-        const y = (e.clientY - top - height / 2) / 25;
-        setMousePosition({ x, y });
-      }
-    };
+  // More efficient: use onMouseMove instead of global event listener
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (containerRef.current) {
+      const { left, top, width, height } =
+        containerRef.current.getBoundingClientRect();
+      const x = (e.clientX - left - width / 2) / 25;
+      const y = (e.clientY - top - height / 2) / 25;
+      setMousePosition({ x, y });
+    }
+  };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  // Reset position when mouse leaves
+  const handleMouseLeave = () => {
+    setMousePosition({ x: 0, y: 0 });
+  };
 
   // Create text shadow for 3D effect
   const generateTextShadow = () => {
@@ -70,6 +71,8 @@ export function Text3DEffect({
       initial="initial"
       animate="animate"
       variants={textVariants}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
       <motion.span
         className={cn('inline-block font-extrabold', color)}

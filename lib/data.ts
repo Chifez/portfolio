@@ -6,6 +6,32 @@ export const blurDataURL = `data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3
 
 export const projects: Project[] = [
   {
+    title: 'MEETLITE',
+    description:
+      'A Real-Time Video Conferencing platform, where users can create and join meetings with ease',
+    technologies: [
+      'REACT',
+      'TYPESCRIPT',
+      'NODEJS',
+      'WEBRTC',
+      'SOCKET.IO',
+      'EXPRESSJS',
+      'MONGODB',
+      'AXIOS',
+      'TAILWINDCSS',
+    ],
+    link: 'https://meetlit.netlify.app/',
+    image: '/meetlite.png',
+  },
+  {
+    title: 'MAINSTACK',
+    description:
+      'A responsive dashboard UI for mainstack admin panel for managing transactions and finances',
+    technologies: ['NEXTJS', 'TYPESCRIPT', 'TAILWINDCSS', 'ZUSTAND'],
+    link: 'https://mainstack-assesment.vercel.app/',
+    image: '/mainstack.png',
+  },
+  {
     title: 'ASSIGNGPT',
     description:
       'A GPT-4 based AI assistant for people to get quizzes on any subject',
@@ -43,14 +69,14 @@ export const projects: Project[] = [
     link: 'https://stt-app-roan.vercel.app/',
     image: '/convertly.png',
   },
-  {
-    title: 'CLI-TEMPLATE-STARTER',
-    description:
-      'A cli tool for scaffolding frontend projects with a framework of choice',
-    technologies: ['JAVASCRIPT', 'NODEJS', 'YAML', 'NODEJS'],
-    link: 'https://github.com/Chifez/cli-template-starter',
-    image: '/user.webp',
-  },
+  // {
+  //   title: 'CLI-TEMPLATE-STARTER',
+  //   description:
+  //     'A cli tool for scaffolding frontend projects with a framework of choice',
+  //   technologies: ['JAVASCRIPT', 'NODEJS', 'YAML', 'NODEJS'],
+  //   link: 'https://github.com/Chifez/cli-template-starter',
+  //   image: '/user.webp',
+  // },
   {
     title: 'ENSUBEB',
     description:

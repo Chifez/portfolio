@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -13,10 +12,8 @@ export default function BlogPostError({
 }) {
   const router = useRouter();
 
-  useEffect(() => {
-    // Log the error to an error reporting service
-    console.error('Blog post error:', error);
-  }, [error]);
+  // Log error immediately without useEffect - this is more appropriate for error boundaries
+  console.error('Blog post error:', error);
 
   return (
     <div className="min-h-screen py-20 px-4">

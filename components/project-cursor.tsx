@@ -12,8 +12,10 @@ interface ProjectCursorProps {
 export default function ProjectCursor({ projectImage }: ProjectCursorProps) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-  const [isProjectHovering, setIsProjectHovering] = useState(false);
   const isMobile = useIsMobile();
+
+  // Compute derived state directly instead of using useEffect
+  const isProjectHovering = !!projectImage;
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -41,14 +43,6 @@ export default function ProjectCursor({ projectImage }: ProjectCursorProps) {
       document.removeEventListener('mouseout', handleMouseOut);
     };
   }, []);
-
-  useEffect(() => {
-    if (projectImage) {
-      setIsProjectHovering(true);
-    } else {
-      setIsProjectHovering(false);
-    }
-  }, [projectImage]);
 
   // Don't render on mobile
   if (isMobile) return null;

@@ -38,7 +38,6 @@ export default function Blog({ initialPosts: posts }: BlogProps) {
       : posts.filter((post) => post.category === selectedCategory);
 
   useEffect(() => {
-    console.log('blogs', posts);
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

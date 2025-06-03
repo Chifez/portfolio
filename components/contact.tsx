@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useMutation } from '@tanstack/react-query';
@@ -8,16 +8,15 @@ import { toast } from 'sonner';
 import { contactSchema, type ContactFormData } from '@/lib/validations/contact';
 
 export default function Contact() {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const socialsRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
     message: '',
   });
-
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const formRef = useRef<HTMLFormElement>(null);
-  const socialsRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
 
   const { mutate: submitForm, isPending } = useMutation({
     mutationFn: async (data: ContactFormData) => {
@@ -65,29 +64,6 @@ export default function Contact() {
     }
   };
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (headingRef.current) observer.observe(headingRef.current);
-    if (formRef.current) observer.observe(formRef.current);
-    if (socialsRef.current) observer.observe(socialsRef.current);
-
-    return () => {
-      if (headingRef.current) observer.unobserve(headingRef.current);
-      if (formRef.current) observer.unobserve(formRef.current);
-      if (socialsRef.current) observer.unobserve(socialsRef.current);
-    };
-  }, []);
-
   const socialLinks = [
     // { name: 'INSTAGRAM', url: 'https://www.instagram.com/chifez4u' },
     {
@@ -107,7 +83,7 @@ export default function Contact() {
       <div className="w-full lg:w-fit">
         <motion.h1
           ref={headingRef}
-          className="text-5xl lg:text-6xl font-bold mb-4 opacity-0"
+          className="text-5xl lg:text-6xl font-bold mb-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: isMobile ? 0.7 : 0.5 }}
@@ -115,7 +91,7 @@ export default function Contact() {
           LET&apos;S TALK!
         </motion.h1>
         <motion.p
-          className="text-lg text-gray-400 mb-12 opacity-0"
+          className="text-lg text-gray-400 mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: isMobile ? 0.7 : 0.5, delay: 0.2 }}
@@ -125,7 +101,7 @@ export default function Contact() {
         <motion.form
           ref={formRef}
           onSubmit={handleSubmit}
-          className="w-full opacity-0"
+          className="w-full"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: isMobile ? 0.7 : 0.5, delay: 0.4 }}
@@ -180,7 +156,7 @@ export default function Contact() {
 
       <motion.div
         ref={socialsRef}
-        className="mt-20 text-center opacity-0 w-full lg:w-fit"
+        className="mt-20 text-center w-full lg:w-fit"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}

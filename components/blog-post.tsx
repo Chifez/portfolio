@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ChevronLeft } from 'lucide-react';
@@ -21,27 +21,6 @@ export default function BlogPost({ post }: BlogPostProps) {
   const headerRef = useRef<HTMLDivElement>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (contentRef.current) observer.observe(contentRef.current);
-    if (headerRef.current) observer.observe(headerRef.current);
-
-    return () => {
-      if (contentRef.current) observer.unobserve(contentRef.current);
-      if (headerRef.current) observer.unobserve(headerRef.current);
-    };
-  }, []);
-
   return (
     <div className="min-h-screen py-10 px-4">
       <div className="max-w-3xl mx-auto">
@@ -59,7 +38,7 @@ export default function BlogPost({ post }: BlogPostProps) {
 
         <motion.div
           ref={headerRef}
-          className="mb-10 lg:mb-12 opacity-0"
+          className="mb-10 lg:mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -133,7 +112,7 @@ export default function BlogPost({ post }: BlogPostProps) {
 
         <motion.div
           ref={contentRef}
-          className="prose prose-invert max-w-none opacity-0"
+          className="prose prose-invert max-w-none"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}

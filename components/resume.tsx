@@ -1,40 +1,20 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useIsMobile } from '@/hooks/use-mobile';
+
 export default function Resume() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (headingRef.current) observer.observe(headingRef.current);
-    if (contentRef.current) observer.observe(contentRef.current);
-
-    return () => {
-      if (headingRef.current) observer.unobserve(headingRef.current);
-      if (contentRef.current) observer.unobserve(contentRef.current);
-    };
-  }, []);
-
   return (
     <div className="min-h-screen px-4 lg:px-0 py-20">
       <motion.h1
         ref={headingRef}
-        className="text-5xl md:text-6xl font-bold mb-8 opacity-0 max-w-4xl mx-auto"
+        className="text-5xl md:text-6xl font-bold mb-8 max-w-4xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: isMobile ? 0.7 : 0.5 }}
@@ -44,7 +24,7 @@ export default function Resume() {
 
       <motion.div
         ref={contentRef}
-        className="opacity-0 space-y-12 max-w-4xl mx-auto"
+        className="space-y-12 max-w-4xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: isMobile ? 0.7 : 0.5, delay: 0.2 }}

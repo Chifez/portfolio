@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { Home } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -12,11 +11,6 @@ export default function BlogError({
   reset: () => void;
 }) {
   const router = useRouter();
-
-  useEffect(() => {
-    // Log the error to an error reporting service
-    console.error('Blog list error:', error);
-  }, [error]);
 
   return (
     <div className="min-h-screen py-20 px-4">

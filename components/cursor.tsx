@@ -3,12 +3,12 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { useCursorStore } from '@/lib/store/cursor-store';
+import { useCustomCursorActive } from '@/lib/store/cursor-store';
 
 export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-  const { isCustomCursorActive } = useCursorStore();
+  const isCustomCursorActive = useCustomCursorActive();
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -41,8 +41,9 @@ export default function CustomCursor() {
   // Don't render on mobile
   if (isMobile) return null;
 
-  // Don't render if a custom cursor is active
+  // Don't render if a custom cursor is active (derived state!)
   if (isCustomCursorActive) return null;
+
   return (
     <motion.div
       className="hidden lg:block fixed top-0 left-0 w-6 h-6 rounded-full bg-white mix-blend-difference pointer-events-none z-50"
