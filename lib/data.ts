@@ -24,15 +24,7 @@ export const projects: Project[] = [
     image: '/meetlite.png',
   },
   {
-    title: 'MAINSTACK',
-    description:
-      'A responsive dashboard UI for mainstack admin panel for managing transactions and finances',
-    technologies: ['NEXTJS', 'TYPESCRIPT', 'TAILWINDCSS', 'ZUSTAND'],
-    link: 'https://mainstack-assesment.vercel.app/',
-    image: '/mainstack.png',
-  },
-  {
-    title: 'ASSIGNGPT',
+    title: 'QUIZMEGPT',
     description:
       'A GPT-4 based AI assistant for people to get quizzes on any subject',
     technologies: [
@@ -43,8 +35,16 @@ export const projects: Project[] = [
       'VERCEL AI SDK',
       'OPENAI API',
     ],
-    link: 'https://assign-gpt.vercel.app/',
+    link: 'https://quizme-gpt.vercel.app/',
     image: '/assign.png',
+  },
+  {
+    title: 'MAINSTACK',
+    description:
+      'A responsive dashboard UI for mainstack admin panel for managing transactions and finances',
+    technologies: ['NEXTJS', 'TYPESCRIPT', 'TAILWINDCSS', 'ZUSTAND'],
+    link: 'https://mainstack-assesment.vercel.app/',
+    image: '/mainstack.png',
   },
   {
     title: 'ECHO',
