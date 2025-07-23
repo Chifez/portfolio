@@ -54,7 +54,10 @@ export const metadata: Metadata = {
     description:
       'Full Stack Developer specializing in React, Next.js, and modern web technologies.',
     images: ['/twitter-image.png'],
+    site: '@chifez4u',
+    siteId: '@chifez4u',
     creator: '@chifez4u',
+    creatorId: '@chifez4u',
   },
   robots: {
     index: true,
