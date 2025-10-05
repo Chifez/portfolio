@@ -59,17 +59,18 @@ async function connectDB() {
     }
   } else {
     // In production, create a new connection for each request
-    if (isConnected) {
+    if (isConnected && mongoose.connection.readyState === 1) {
       console.log('Using existing database connection in production');
-      return;
+      return mongoose.connection;
     }
 
     try {
       console.log('Creating new database connection in production');
       mongoose.set('strictQuery', false);
-      await mongoose.connect(MONGODB_URI, options);
+      const conn = await mongoose.connect(MONGODB_URI, options);
       isConnected = true;
       console.log('MongoDB connected successfully in production');
+      return conn;
     } catch (error) {
       console.error('Error connecting to MongoDB in production:', error);
       isConnected = false;
