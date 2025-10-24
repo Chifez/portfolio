@@ -5,24 +5,24 @@ import { BlogPost, Project } from './types';
 export const blurDataURL = `data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgNDAwIDMwMCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzMzMzMzMyIvPjwvc3ZnPg==`;
 
 export const projects: Project[] = [
-  {
-    title: 'MEETLITE',
-    description:
-      'A Real-Time Video Conferencing platform, where users can create and join meetings with ease',
-    technologies: [
-      'REACT',
-      'TYPESCRIPT',
-      'NODEJS',
-      'WEBRTC',
-      'SOCKET.IO',
-      'EXPRESSJS',
-      'MONGODB',
-      'AXIOS',
-      'TAILWINDCSS',
-    ],
-    link: 'https://meetlit.netlify.app/',
-    image: '/meetlite.png',
-  },
+  // {
+  //   title: 'MEETLITE (WIP)',
+  //   description:
+  //     'A Real-Time Video Conferencing platform, where users can create and join meetings with ease',
+  //   technologies: [
+  //     'REACT',
+  //     'TYPESCRIPT',
+  //     'NODEJS',
+  //     'WEBRTC',
+  //     'SOCKET.IO',
+  //     'EXPRESSJS',
+  //     'MONGODB',
+  //     'AXIOS',
+  //     'TAILWINDCSS',
+  //   ],
+  //   link: 'https://meetlit.netlify.app/',
+  //   image: '/meetlite.png',
+  // },
   {
     title: 'QUIZMEGPT',
     description:
