@@ -31,8 +31,9 @@ function getAbsoluteImageUrl(url: string, metadataBase: URL): string {
 
 export async function generateMetadata(
   { params }: Props,
-  parent: ResolvingMetadata
+  _parent: ResolvingMetadata
 ): Promise<Metadata> {
+  const siteOrigin = 'https://blog.emcodes.xyz';
   const id = (await params).id;
   if (!id) {
     return {
@@ -49,9 +50,7 @@ export async function generateMetadata(
     };
   }
 
-  // Get the parent metadata and base URL
-  const parentMetadata = await parent;
-  const metadataBase = parentMetadata.metadataBase as URL;
+  const metadataBase = new URL(siteOrigin);
   const defaultImage = {
     url: '/opengraph-image.png',
     width: 1200,
@@ -63,12 +62,19 @@ export async function generateMetadata(
   const postImageUrl = post.image?.url
     ? getAbsoluteImageUrl(post.image.url, metadataBase)
     : getAbsoluteImageUrl(defaultImage.url, metadataBase);
+  const slugOrId = post.slug || post._id || post.id || id;
+  const postPath = `/blog/${slugOrId}`;
+  const absolutePostUrl = `${siteOrigin}${postPath}`;
 
   return {
+    metadataBase,
     title: post.title,
     description: post.excerpt,
     keywords: post.tags,
     authors: [{ name: post.author?.name || 'Nwosu Emmanuel' }],
+    alternates: {
+      canonical: absolutePostUrl,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
@@ -76,7 +82,7 @@ export async function generateMetadata(
       publishedTime: post.createdAt,
       authors: [post.author?.name || 'Nwosu Emmanuel'],
       tags: post.tags,
-      url: `https://emcodes.xyz/blog/${post.id}`,
+      url: absolutePostUrl,
       images: [
         {
           url: postImageUrl,
