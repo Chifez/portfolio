@@ -9,6 +9,30 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-}
+  async rewrites() {
+    return [
+      {
+        source: '/',
+        has: [
+          {
+            type: 'host',
+            value: 'blog.emcodes.xyz',
+          },
+        ],
+        destination: '/blog',
+      },
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'blog.emcodes.xyz',
+          },
+        ],
+        destination: '/blog/:path*',
+      },
+    ];
+  },
+};
 
-export default nextConfig
+export default nextConfig;
