@@ -63,7 +63,16 @@ export default function Blog({ initialPosts: posts }: BlogProps) {
       <div className="mb-4">
         <motion.button
           className="flex text-xs items-center text-gray-400 hover:text-white transition-colors"
-          onClick={() => router.push('/')}
+          onClick={() => {
+            if (
+              typeof window !== 'undefined' &&
+              window.location.hostname === 'blog.emcodes.xyz'
+            ) {
+              window.location.href = 'https://emcodes.xyz';
+            } else {
+              router.push('/');
+            }
+          }}
           whileHover={{ x: -5 }}
           transition={{ duration: 0.2 }}
         >
