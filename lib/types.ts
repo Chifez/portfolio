@@ -3,7 +3,7 @@ export interface Project {
   description: string;
   technologies: string[];
   link?: string;
-  image?: string;
+  image: string;
 }
 export interface BlogPost {
   _id?: string;
