@@ -46,7 +46,9 @@ export default function BlogPost({ post }: BlogPostProps) {
           <div className="flex items-center space-x-4 mb-6">
             <div className="relative w-10 h-10 rounded-full overflow-hidden">
               <Image
-                src="/corporate.jpg"
+                src={
+                  post.author?.avatar || '/placeholder.svg?height=40&width=40'
+                }
                 alt={post.author?.name || 'Author'}
                 fill
                 priority
