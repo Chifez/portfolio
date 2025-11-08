@@ -11,10 +11,11 @@ export function middleware(request: NextRequest) {
 
     const isNextAsset =
       pathname.startsWith('/_next/') || pathname === '/favicon.ico';
+    const isStaticAsset = /\.[^/]+$/.test(pathname);
     const isApiRoute = pathname.startsWith('/api');
     const alreadyOnBlog = pathname.startsWith('/blog');
 
-    if (!isNextAsset && !isApiRoute && !alreadyOnBlog) {
+    if (!isNextAsset && !isStaticAsset && !isApiRoute && !alreadyOnBlog) {
       url.pathname = pathname === '/' ? '/blog' : `/blog${pathname}`;
       return NextResponse.rewrite(url);
     }
