@@ -9,6 +9,20 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/:slug/:id',
+        destination: '/blog/:slug/:id',
+        // has: [
+        //   {
+        //     type: 'host',
+        //     value: 'blog.emcodes.xyz',
+        //   },
+        // ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -13,7 +13,6 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
       .sort({ createdAt: -1 })
       .lean();
 
-    console.log('posts', posts);
     // If we have posts in the database, return them
     if (posts && posts.length > 0) {
       return JSON.parse(JSON.stringify(posts)) as BlogPost[];

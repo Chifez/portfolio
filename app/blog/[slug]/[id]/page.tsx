@@ -7,12 +7,13 @@ import BlogPostLoading from './loading';
 
 interface PageProps {
   params: {
+    slug: string;
     id: string;
   };
 }
 
 type Props = {
-  params: { id: string };
+  params: { slug: string; id: string };
 };
 
 function getAbsoluteImageUrl(url: string, metadataBase: URL): string {
@@ -34,7 +35,7 @@ export async function generateMetadata(
   _parent: ResolvingMetadata
 ): Promise<Metadata> {
   const siteOrigin = 'https://blog.emcodes.xyz';
-  const id = (await params).id;
+  const { id } = await params;
   if (!id) {
     return {
       title: 'Post Not Found',
@@ -62,8 +63,7 @@ export async function generateMetadata(
   const postImageUrl = post.image?.url
     ? getAbsoluteImageUrl(post.image.url, metadataBase)
     : getAbsoluteImageUrl(defaultImage.url, metadataBase);
-  const slugOrId = post.slug || post._id || post.id || id;
-  const postPath = `/blog/${slugOrId}`;
+  const postPath = `/${post.slug}/${post._id}`;
   const absolutePostUrl = `${siteOrigin}${postPath}`;
 
   return {
@@ -111,8 +111,20 @@ async function BlogPostContent({ id }: { id: string }) {
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
-  const id = (await params).id;
+  const { slug, id } = await params;
   if (!id) {
+    notFound();
+  }
+
+  // Fetch the post to validate it exists and slug matches
+  const post = await getBlogPostById(id);
+  if (!post) {
+    notFound();
+  }
+
+  // Validate that the slug in the URL matches the post's slug
+  // This ensures only valid blog posts are served
+  if (post.slug !== slug) {
     notFound();
   }
 
