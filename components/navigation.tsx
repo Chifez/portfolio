@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import Logo from './logo';
 import { useRouter } from 'next/navigation';
+import { getBlogUrl } from '@/lib/helpers';
 
 export default function Navigation() {
   const { currentSection, navigateTo } = useNavigation();
@@ -42,7 +43,7 @@ export default function Navigation() {
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <a href="https://blog.emcodes.xyz">{item.label}</a>
+                  <a href={getBlogUrl()}>{item.label}</a>
                 </motion.button>
               ) : (
                 <motion.button

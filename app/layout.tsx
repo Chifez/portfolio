@@ -2,9 +2,10 @@ import type React from 'react';
 import type { Metadata } from 'next';
 import './globals.css';
 import Providers from './providers';
+import { getSiteUrl } from '@/lib/helpers';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://emcodes.xyz'),
+  metadataBase: new URL(getSiteUrl()),
   title: {
     default: 'Nwosu Emmanuel | Full Stack Developer',
     template: '%s | Nwosu Emmanuel',
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://emcodes.xyz',
+    url: getSiteUrl(),
     title: 'Nwosu Emmanuel | Full Stack Developer',
     description:
       'Full Stack Developer specializing in React, Next.js, and modern web technologies. Building beautiful, performant, and user-friendly web applications.',

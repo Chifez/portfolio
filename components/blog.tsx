@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import EmptyState from './empty-state';
 import { BlogPost } from '@/lib/types';
-import { formatDate } from '@/lib/helpers';
+import { formatDate, getSiteUrl, getBlogHost } from '@/lib/helpers';
 import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { blurDataURL } from '@/lib/data';
@@ -31,6 +31,17 @@ export default function Blog({ initialPosts: posts }: BlogProps) {
     'All',
     ...Array.from(new Set(posts.map((post) => post.category))),
   ];
+
+  const handleNavClick = () => {
+    if (
+      typeof window !== 'undefined' &&
+      window.location.hostname === getBlogHost()
+    ) {
+      window.location.href = getSiteUrl();
+    } else {
+      router.push('/');
+    }
+  };
 
   const filteredPosts =
     selectedCategory === 'All'
@@ -63,16 +74,7 @@ export default function Blog({ initialPosts: posts }: BlogProps) {
       <div className="mb-4">
         <motion.button
           className="flex text-xs items-center text-gray-400 hover:text-white transition-colors"
-          onClick={() => {
-            if (
-              typeof window !== 'undefined' &&
-              window.location.hostname === 'blog.emcodes.xyz'
-            ) {
-              window.location.href = 'https://emcodes.xyz';
-            } else {
-              router.push('/');
-            }
-          }}
+          onClick={handleNavClick}
           whileHover={{ x: -5 }}
           transition={{ duration: 0.2 }}
         >

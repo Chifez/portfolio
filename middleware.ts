@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
+import { getBlogHost } from './lib/helpers';
 
-const BLOG_HOST = 'blog.emcodes.xyz';
+const BLOG_HOST = getBlogHost();
 
 export function middleware(request: NextRequest) {
   const host = request.headers.get('host')?.toLowerCase();

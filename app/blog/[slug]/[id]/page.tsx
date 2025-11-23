@@ -4,6 +4,7 @@ import { Metadata, ResolvingMetadata } from 'next';
 import BlogPost from '@/components/blog-post';
 import { Suspense } from 'react';
 import BlogPostLoading from './loading';
+import { getBlogUrl } from '@/lib/helpers';
 
 interface PageProps {
   params: {
@@ -34,7 +35,7 @@ export async function generateMetadata(
   { params }: Props,
   _parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const siteOrigin = 'https://blog.emcodes.xyz';
+  const siteOrigin = getBlogUrl();
   const { id } = await params;
   if (!id) {
     return {

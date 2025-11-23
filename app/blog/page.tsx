@@ -3,8 +3,9 @@ import { Metadata } from 'next';
 import Blog from '@/components/blog';
 import { Suspense } from 'react';
 import BlogLoading from './loading';
+import { getSiteUrl } from '@/lib/helpers';
 
-const siteOrigin = 'https://blog.emcodes.xyz';
+const siteOrigin = getSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteOrigin),
