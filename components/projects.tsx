@@ -81,13 +81,13 @@ function ProjectRow({
           </motion.h2>
         </div>
 
-            <motion.div
+        <motion.div
           aria-hidden="true"
           initial={false}
           animate={{ opacity: isActive ? 0.35 : 0 }}
-              transition={{ duration: 0.3 }}
-              className="pointer-events-none absolute inset-0 -z-10 bg-black"
-            />
+          transition={{ duration: 0.3 }}
+          className="pointer-events-none absolute inset-0 -z-10 bg-black"
+        />
 
         <AnimatePresence initial={false}>
           {isActive && (
@@ -102,12 +102,12 @@ function ProjectRow({
             >
               <div className="relative flex flex-col items-center gap-6 md:gap-8 pb-12 md:pb-16 pt-12 md:pt-32">
                 <div className="md:absolute md:left-1/2 md:top-0 md:-translate-x-1/2 md:-translate-y-[60%] w-full flex justify-center">
-                  <div className="relative w-full aspect-[3/4] overflow-hidden rounded-2xl border border-white/20 bg-black/30 shadow-lg shadow-black/40 md:max-w-[28rem] md:aspect-video">
+                  <div className="relative w-[90vw] aspect-video overflow-hidden rounded-2xl border border-white/20 bg-black/30 shadow-lg shadow-black/40 md:w-[20rem]">
                     <Image
                       src={imageSrc}
                       alt={project.title}
                       fill
-                      sizes="(max-width: 768px) 70vw, (max-width: 1280px) 30vw,200px"
+                      sizes="(max-width: 768px) 90vw, 20rem"
                       className="object-cover"
                       priority
                       loading="eager"
@@ -189,43 +189,43 @@ export default function Projects() {
         ))}
       </Head>
       <section className="relative py-16 md:py-24 lg:py-28">
-      <div className="px-0">
-        <motion.h1
-          className="text-5xl md:text-7xl font-bold text-center tracking-tighter"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: isMobile ? 0.7 : 0.5 }}
-        >
-          PROJECTS ({projects.length})
-        </motion.h1>
+        <div className="px-0">
+          <motion.h1
+            className="text-5xl md:text-7xl font-bold text-center tracking-tighter"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: isMobile ? 0.7 : 0.5 }}
+          >
+            PROJECTS ({projects.length})
+          </motion.h1>
 
-        <div className="mt-12 border-t border-white/10">
-          {projects.map((project: Project, index: number) => (
-            <ProjectRow
-              key={project.title}
-              project={project}
-              index={index}
+          <div className="mt-12 border-t border-white/10">
+            {projects.map((project: Project, index: number) => (
+              <ProjectRow
+                key={project.title}
+                project={project}
+                index={index}
                 isActive={expandedIndex === index}
                 onToggle={handleToggle}
                 onPreview={handlePreview}
-              isMobile={isMobile}
-            />
-          ))}
-        </div>
+                isMobile={isMobile}
+              />
+            ))}
+          </div>
 
-        <motion.div
-          className="text-center mt-16 text-gray-500 text-sm px-4 md:px-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-        >
-          Should I count this website as my project?{' '}
-          <span onClick={() => navigateTo('contact')} className="underline">
-            Lemme know
-          </span>
-        </motion.div>
-      </div>
-    </section>
+          <motion.div
+            className="text-center mt-16 text-gray-500 text-sm px-4 md:px-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+          >
+            Should I count this website as my project?{' '}
+            <span onClick={() => navigateTo('contact')} className="underline">
+              Lemme know
+            </span>
+          </motion.div>
+        </div>
+      </section>
       <ProjectCursor projectImage={projectImage ?? undefined} />
     </>
   );
