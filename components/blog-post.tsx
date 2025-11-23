@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { ChevronLeft } from 'lucide-react';
 import type { BlogPost as BlogPostType } from '@/lib/types';
 import { useRouter } from 'next/navigation';
-import { formatDate } from '@/lib/helpers';
+import { formatDate, getSiteUrl, getBlogHost } from '@/lib/helpers';
 import LikeButton from './like-button';
 import ShareButton from './share-button';
 import { blurDataURL } from '@/lib/data';
@@ -21,13 +21,24 @@ export default function BlogPost({ post }: BlogPostProps) {
   const headerRef = useRef<HTMLDivElement>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
 
+  const handleBackClick = () => {
+    if (
+      typeof window !== 'undefined' &&
+      window.location.hostname === getBlogHost()
+    ) {
+      window.location.href = getSiteUrl();
+    } else {
+      router.push('/blog');
+    }
+  };
+
   return (
     <div className="min-h-screen py-10 px-4">
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
           <motion.button
             className="flex text-xs items-center text-gray-400 hover:text-white transition-colors"
-            onClick={() => router.push('/blog')}
+            onClick={handleBackClick}
             whileHover={{ x: -5 }}
             transition={{ duration: 0.2 }}
           >
