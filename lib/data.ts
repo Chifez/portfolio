@@ -8,7 +8,7 @@ export const projects: Project[] = [
   // {
   //   title: 'MEETLITE (WIP)',
   //   description:
-  //     'A Real-Time Video Conferencing platform, where users can create and join meetings with ease',
+  //     'Collaborative conferencing application for modern teams',
   //   technologies: [
   //     'REACT',
   //     'TYPESCRIPT',
@@ -16,6 +16,7 @@ export const projects: Project[] = [
   //     'WEBRTC',
   //     'SOCKET.IO',
   //     'EXPRESSJS',
+  //     'BULLMQ',
   //     'MONGODB',
   //     'AXIOS',
   //     'TAILWINDCSS',
@@ -23,6 +24,20 @@ export const projects: Project[] = [
   //   link: 'https://meetlit.netlify.app/',
   //   image: '/meetlite.png',
   // },
+  {
+    title: 'MAINSTACK',
+    description:
+      'A modern, enterprise-grade financial ledger and wallet management system flow, following mainstack UI and admin panel for managing transactions and finances',
+    technologies: [
+      'NEXTJS',
+      'TYPESCRIPT',
+      'TAILWINDCSS',
+      'ZUSTAND',
+      'POSTGRES',
+    ],
+    link: 'https://mainstack-assement.vercel.app/',
+    image: '/mainstack.png',
+  },
   {
     title: 'QUIZMEGPT',
     description:
@@ -38,14 +53,7 @@ export const projects: Project[] = [
     link: 'https://quizme-gpt.vercel.app/',
     image: '/assign.png',
   },
-  {
-    title: 'MAINSTACK',
-    description:
-      'A responsive dashboard UI for mainstack admin panel for managing transactions and finances',
-    technologies: ['NEXTJS', 'TYPESCRIPT', 'TAILWINDCSS', 'ZUSTAND'],
-    link: 'https://mainstack-assesment.vercel.app/',
-    image: '/mainstack.png',
-  },
+
   {
     title: 'ECHO',
     description:
